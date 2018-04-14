@@ -1,5 +1,6 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
+import 'vant/lib/vant-css/icon-local.css'
 import App from './App'
 import routes from './routes'
 
