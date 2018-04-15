@@ -1,20 +1,38 @@
 <template>
-  <div>
-    <van-cell-group class="item-list">
-      <van-cell is-link icon="points" title="我的积分" />
-      <van-cell is-link icon="gift" title="我收到的礼物" />
-    </van-cell-group>
-  </div>
+  <van-list v-model="loading" :finished="finished" @load="onLoad">
+    <van-cell v-for="item in goods" :key="item" :title="item + ''" />
+  </van-list>
 </template>
 
 <script>
-import { Cell, CellGroup, Icon } from 'vant';
+import { Cell, List, Icon } from 'vant';
 
 export default {
+  data() {
+    return {
+      goods: [],
+      loading: false,
+      finished: false
+    }
+  },
   components: {
     [Cell.name]: Cell,
-    [CellGroup.name]: CellGroup,
+    [List.name]: CellGroup,
     [Icon.name]: Icon
+  },
+  methods: {
+    onLoad() {
+      setTimeout(() => {
+        for (let i = 0; i < 10; i++) {
+          this.goods.push(this.goods.length + 1);
+        }
+        this.loading = false;
+
+        if (this.goods.length >= 40) {
+          this.finished = true;
+        }
+      }, 500);
+    }
   }
 };
 </script>
