@@ -1,6 +1,6 @@
 # vant-shop
 
-基于vant的移动端商城项目
+基于vant ui的移动端商城项目
 
 ## Build Setup
 
