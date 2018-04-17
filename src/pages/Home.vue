@@ -17,7 +17,7 @@ export default {
   },
   components: {
     [Cell.name]: Cell,
-    [List.name]: CellGroup,
+    [List.name]: List,
     [Icon.name]: Icon
   },
   methods: {
