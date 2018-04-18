@@ -46,23 +46,23 @@ export default {
 </script>
 
 <style>
-  .register-page {
-    padding: 30px;
-  }
-  .logo-img {
-    display: block;
-    margin: 0 auto;
-  }
-  .register-field {
-    margin-bottom: 15px;
-    border: 1px solid #f44;
-    border-radius: 4px;
-  }
-  .register-btn {
-    display: block;
-    background-color: #f44;
-    color: #fff;
-  }
+.register-page {
+  padding: 30px;
+}
+.logo-img {
+  display: block;
+  margin: 0 auto;
+}
+.register-field {
+  margin-bottom: 15px;
+  border: 1px solid #f44;
+  border-radius: 4px;
+}
+.register-btn {
+  display: block;
+  background-color: #f44;
+  color: #fff;
+}
 </style>
 
 

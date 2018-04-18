@@ -40,24 +40,24 @@ export default {
 </script>
 
 <style>
-  .login-page {
-    padding: 30px;
-  }
-  .logo-img {
-    display: block;
-    margin: 0 auto;
-  }
-  .login-field {
-    margin-bottom: 15px;
-    border: 1px solid #f44;
-    border-radius: 4px;
-  }
-  .login-btn {
-    display: block;
-    margin-bottom: 15px;
-    background-color: #f44;
-    color: #fff;
-  }
+.login-page {
+  padding: 30px;
+}
+.logo-img {
+  display: block;
+  margin: 0 auto;
+}
+.login-field {
+  margin-bottom: 15px;
+  border: 1px solid #f44;
+  border-radius: 4px;
+}
+.login-btn {
+  display: block;
+  margin-bottom: 15px;
+  background-color: #f44;
+  color: #fff;
+}
 </style>
 
 
