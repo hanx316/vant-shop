@@ -2,7 +2,7 @@
   <div class="register-page">
     <img class="logo-img" src="@/assets/logo.png">
     <van-field v-model="nickname" class="register-field" label="昵称" placeholder="您的昵称" icon="clear" @click-icon="clearNickname" required />
-    <van-field v-model="mobile" class="register-field" label="手机号" placeholder="您的手机号" icon="clear" @click-icon="clearMobile" required />
+    <van-field v-model="mobile" class="register-field" type="number" label="手机号" placeholder="您的手机号" icon="clear" @click-icon="clearMobile" required />
     <van-field v-model="password" class="register-field" type="password" label="密码" placeholder="请输入密码" icon="clear" @click-icon="clearPsw" required />
     <van-field v-model="confirmPsw" class="register-field" type="password" label="确认密码" placeholder="请再次输入密码" icon="clear" @click-icon="clearConfirmPsw" required />
     <van-button class="register-btn" size="large" @click="register">立即注册</van-button>
@@ -47,7 +47,7 @@ export default {
 
 <style>
   .register-page {
-    padding: 3rem;
+    padding: 30px;
   }
   .logo-img {
     display: block;
@@ -59,6 +59,7 @@ export default {
     border-radius: 4px;
   }
   .register-btn {
+    display: block;
     background-color: #f44;
     color: #fff;
   }

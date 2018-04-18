@@ -1,7 +1,7 @@
 <template>
   <div class="login-page">
     <img class="logo-img" src="@/assets/logo.png">
-    <van-field v-model="mobile" class="login-field" label="手机号" placeholder="请输入手机号" icon="clear" @click-icon="clearMobile" required />
+    <van-field v-model="mobile" class="login-field" type="number" label="手机号" placeholder="请输入手机号" icon="clear" @click-icon="clearMobile" required />
     <van-field v-model="password" class="login-field" type="password" label="密码" placeholder="请输入密码" icon="clear" @click-icon="clearPsw" required />
     <van-button class="login-btn" size="large" @click="login">立即登录</van-button>
     <van-button class="login-btn" size="large" @click="goRegister">立即注册</van-button>
@@ -41,7 +41,7 @@ export default {
 
 <style>
   .login-page {
-    padding: 3rem;
+    padding: 30px;
   }
   .logo-img {
     display: block;
@@ -53,6 +53,7 @@ export default {
     border-radius: 4px;
   }
   .login-btn {
+    display: block;
     margin-bottom: 15px;
     background-color: #f44;
     color: #fff;

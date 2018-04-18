@@ -1,3 +1,4 @@
+import '@/common/rem.js'
 import Vue from 'vue'
 import VueRouter from 'vue-router'
 import 'vant/lib/vant-css/icon-local.css'
