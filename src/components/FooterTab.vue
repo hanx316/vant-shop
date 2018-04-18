@@ -8,7 +8,7 @@
 </template>
 
 <script>
-import { Tabbar, TabbarItem, Icon } from 'vant'
+import { Tabbar, TabbarItem } from 'vant'
 
 export default {
   data() {

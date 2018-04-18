@@ -5,7 +5,7 @@
 </template>
 
 <script>
-import { Cell, List, Icon } from 'vant';
+import { Cell, List } from 'vant';
 
 export default {
   data() {
@@ -17,8 +17,7 @@ export default {
   },
   components: {
     [Cell.name]: Cell,
-    [List.name]: List,
-    [Icon.name]: Icon
+    [List.name]: List
   },
   methods: {
     onLoad() {

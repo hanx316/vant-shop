@@ -5,7 +5,13 @@
 </template>
 
 <script>
+import { Icon } from 'vant'
 
+export default {
+  components: {
+    [Icon.name]: Icon
+  }
+}
 </script>
 
 <style>
