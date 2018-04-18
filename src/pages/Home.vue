@@ -1,6 +1,6 @@
 <template>
   <van-list v-model="loading" :finished="finished" @load="onLoad" class="goods-list">
-    <div v-for="item in goods" :key="item.id" class="good-box">
+    <div v-for="item in goods" :key="item.id" @click="handleClick(item.id)" class="good-box">
       <img :src="item.img" class="good-pic">
       <div class="good-info">
         <span class="good-name">{{ item.name }}</span>
@@ -44,6 +44,10 @@ export default {
           this.finished = true;
         }
       }, 500);
+    },
+
+    handleClick(id) {
+      this.$router.push(`/goodpre/${id}`)
     }
   }
 };
