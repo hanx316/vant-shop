@@ -6,18 +6,14 @@
 import { NavBar, Toast } from 'vant'
 
 export default {
-  data() {
-    return {
-      title: 'test'
-    }
-  },
+  props: ['title'],
   components: {
     [NavBar.name]: NavBar,
     [Toast.name]: Toast
   },
   methods: {
     onClickLeft() {
-      Toast('返回')
+      this.$router.back()
     }
   }
 }
@@ -26,5 +22,3 @@ export default {
 <style>
 
 </style>
-
-
