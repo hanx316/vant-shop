@@ -53,7 +53,7 @@ export default {
 };
 </script>
 
-<style>
+<style scoped>
 .goods-list {
   margin-bottom: 50px;
   padding: 20px;
