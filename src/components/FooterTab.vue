@@ -37,6 +37,14 @@ export default {
           break
       }
     }
+  },
+  created() {
+    const pathMap = {
+      home: 0,
+      shop: 1
+    }
+    let pathname = this.$route.path.slice(1)
+    this.active = pathMap[pathname]
   }
 }
 </script>
