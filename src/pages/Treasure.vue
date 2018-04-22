@@ -85,7 +85,7 @@ export default {
   font-size: 16px;
 }
 .good-progress {
-  padding: 0;
+  padding: 0 0 10px;
 }
 .progress-data {
   margin-top: 10px;
