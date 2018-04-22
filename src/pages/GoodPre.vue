@@ -21,13 +21,30 @@
       </div>
     </div>
     <van-goods-action>
-      <van-goods-action-big-btn text="立即预购" primary />
+      <van-goods-action-big-btn @click="handlePreBuyClick" text="立即预购" primary />
     </van-goods-action>
+    <van-actionsheet v-model="showPanel" title="填写预约信息" class="pre-buy-panel">
+      <div class="pre-buy-form">
+        <van-field v-model="username" label="昵称" icon="clear" @click-icon="onClearUsername" required />
+        <van-field v-model="wechat" label="微信ID" icon="clear" @click-icon="onClearWechat" required />
+        <van-button size="large" type="danger" @click="submit" class="submit-btn">提交预约信息</van-button>
+      </div>
+    </van-actionsheet>
   </div>
 </template>
 
 <script>
-import { Swipe, SwipeItem, Tag, GoodsAction, GoodsActionBigBtn } from 'vant'
+import {
+  Swipe,
+  SwipeItem,
+  Tag,
+  GoodsAction,
+  GoodsActionBigBtn,
+  Actionsheet,
+  Field,
+  Button,
+  Toast
+} from 'vant'
 import HeaderNav from '@/components/HeaderNav'
 
 export default {
@@ -39,7 +56,10 @@ export default {
       desc: '这是一段产品描述文字这是一段产品描述文字这是一段产品描述文字这是一段产品描述文字这是一段产品描述文字这是一段产品描述文字这是一段产品描述文字',
       tags: ['标签1', '标签标签2', '标签3', '标签4', '标签标签标签5', '标签标签6'],
       images: ['static/good1.jpg', 'static/good2.jpg', 'static/good3.jpg', 'static/good4.jpg'],
-      recommends: ['static/goods.jpeg', 'static/goods.jpeg', 'static/goods.jpeg', 'static/goods.jpeg']
+      recommends: ['static/goods.jpeg', 'static/goods.jpeg', 'static/goods.jpeg', 'static/goods.jpeg'],
+      showPanel: false,
+      username: '',
+      wechat: ''
     }
   },
   components: {
@@ -48,7 +68,25 @@ export default {
     [SwipeItem.name]: SwipeItem,
     [Tag.name]: Tag,
     [GoodsAction.name]: GoodsAction,
-    [GoodsActionBigBtn.name]: GoodsActionBigBtn
+    [GoodsActionBigBtn.name]: GoodsActionBigBtn,
+    [Actionsheet.name]: Actionsheet,
+    [Field.name]: Field,
+    [Button.name]: Button,
+    [Toast.name]: Toast
+  },
+  methods: {
+    handlePreBuyClick() {
+      this.showPanel = true
+    },
+    onClearUsername() {
+      this.username = ''
+    },
+    onClearWechat() {
+      this.wechat = ''
+    },
+    submit() {
+      Toast.success('提交成功')
+    }
   },
   created() {
     this.$bus.$emit('hide-footer')
@@ -111,5 +149,14 @@ export default {
   width: 48%;
   height: 150px;
   margin-bottom: 10px;
+}
+.pre-buy-panel {
+  font-size: 16px;
+}
+.pre-buy-form {
+  padding: 20px;
+}
+.submit-btn {
+  margin-top: 20px;
 }
 </style>
