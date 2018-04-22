@@ -30,6 +30,11 @@
           <div slot="title" class="buy-good-info-price">¥ {{ price }}</div>
           <div slot="desc">{{ name }}</div>
         </van-card>
+        <van-cell title="购买数量：">
+          <van-stepper v-model="buyCount" />
+        </van-cell>
+        <van-cell title="订单金额：" :value="totalPrice" />
+        <van-button size="large" type="danger" @click="submit" class="submit-btn">立即支付</van-button>
       </div>
     </van-actionsheet>
   </div>
@@ -43,6 +48,7 @@ import {
   GoodsAction,
   GoodsActionBigBtn,
   Actionsheet,
+  Cell,
   Card,
   Stepper,
   Button,
@@ -61,7 +67,14 @@ export default {
       tags: ['标签1', '标签标签2', '标签3', '标签4', '标签标签标签5', '标签标签6'],
       images: ['static/good1.jpg', 'static/good2.jpg', 'static/good3.jpg', 'static/good4.jpg'],
       details: ['static/goods.jpeg', 'static/goods.jpeg', 'static/goods.jpeg', 'static/goods.jpeg'],
-      showPanel: false
+      showPanel: false,
+      buyCount: 1
+    }
+  },
+  computed: {
+    totalPrice() {
+      let price = Number(this.price)
+      return price * this.buyCount
     }
   },
   components: {
@@ -72,13 +85,19 @@ export default {
     [GoodsAction.name]: GoodsAction,
     [GoodsActionBigBtn.name]: GoodsActionBigBtn,
     [Actionsheet.name]: Actionsheet,
+    [Cell.name]: Cell,
     [Card.name]: Card,
+    [Stepper.name]: Stepper,
     [Button.name]: Button,
     [Toast.name]: Toast
   },
   methods: {
     handleBuyClick() {
       this.showPanel = true
+    },
+
+    submit() {
+      Toast.success('订购成功')
     }
   },
   created() {
