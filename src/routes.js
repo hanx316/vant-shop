@@ -1,9 +1,10 @@
-import Layout from './pages/Layout'
+import Layout from './components/Layout'
 import Login from './pages/Login'
 import Register from './pages/Register'
 import Home from './pages/Home'
 import Shop from './pages/Shop'
 import GoodPre from './pages/GoodPre'
+import GoodBuy from './pages/GoodBuy'
 
 export default [
   {
@@ -22,6 +23,10 @@ export default [
       {
         path: '/shop',
         component: Shop
+      },
+      {
+        path: '/goodbuy/:id',
+        component: GoodBuy
       }
     ]
   },
