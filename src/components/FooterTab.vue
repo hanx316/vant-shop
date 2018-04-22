@@ -16,9 +16,15 @@ export default {
       active: 0
     }
   },
+  props: ['current'],
   components: {
     [Tabbar.name]: Tabbar,
     [TabbarItem.name]: TabbarItem
+  },
+  watch: {
+    current(activeIndex) {
+      activeIndex !== this.active && (this.active = activeIndex)
+    }
   },
   methods: {
     onTabChange(i) {
