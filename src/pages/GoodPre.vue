@@ -17,7 +17,7 @@
     <div class="recommend-good-list">
       <div class="recommend-title">你可能会喜欢</div>
       <div class="recommend-goods">
-        <img v-for="(image, i) in recommends" :key="i" :src="image" class="recommend-image">
+        <img v-for="(image, i) in recommends" :key="i" :src="image" @click="handleLikeClick(i)" class="recommend-image">
       </div>
     </div>
     <van-goods-action>
@@ -75,15 +75,26 @@ export default {
     [Toast.name]: Toast
   },
   methods: {
+    handleLikeClick(index) {
+      console.log(1)
+      this.$router.replace(`/goodpre/${index + 1}`, () => {
+        window.location.reload()
+        window.scroll(0, 0)
+      })
+    },
+
     handlePreBuyClick() {
       this.showPanel = true
     },
+
     onClearUsername() {
       this.username = ''
     },
+
     onClearWechat() {
       this.wechat = ''
     },
+
     submit() {
       Toast.success('提交成功')
     }
@@ -93,7 +104,8 @@ export default {
     this.id = this.$route.params.id
   },
   destroyed() {
-    this.$bus.$emit('show-footer')
+    const footerActiveIndex = 0
+    this.$bus.$emit('show-footer', footerActiveIndex)
   }
 }
 </script>
