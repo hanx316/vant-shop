@@ -11,7 +11,7 @@
 </template>
 
 <script>
-import { CellGroup, List } from 'vant';
+import { CellGroup, List } from 'vant'
 
 export default {
   data() {
@@ -50,7 +50,7 @@ export default {
       this.$router.push(`/goodpre/${id}`)
     }
   }
-};
+}
 </script>
 
 <style scoped>
