@@ -51,7 +51,7 @@ export default {
       treasure: 2
     }
     let pathname = this.$route.path.slice(1)
-    this.active = pathMap[pathname]
+    this.active = pathMap[pathname] || 0
   }
 }
 </script>
