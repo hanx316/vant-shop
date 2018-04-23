@@ -7,6 +7,7 @@ import Treasure from './pages/Treasure'
 import GoodPre from './pages/GoodPre'
 import GoodBuy from './pages/GoodBuy'
 import GoodTreasure from './pages/GoodTreasure'
+import WinnerHistory from './pages/WinnerHistory'
 
 export default [
   {
@@ -19,7 +20,7 @@ export default [
         component: Home
       },
       {
-        path: '/goodpre/:id',
+        path: '/good-pre/:id',
         component: GoodPre
       },
       {
@@ -27,7 +28,7 @@ export default [
         component: Shop
       },
       {
-        path: '/goodbuy/:id',
+        path: '/good-buy/:id',
         component: GoodBuy
       },
       {
@@ -35,8 +36,12 @@ export default [
         component: Treasure
       },
       {
-        path: '/goodtreasure/:id',
+        path: '/good-treasure/:id',
         component: GoodTreasure
+      },
+      {
+        path: '/winner-history/:id',
+        component: WinnerHistory
       }
     ]
   },

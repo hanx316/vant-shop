@@ -50,7 +50,7 @@ export default {
     },
 
     handleClick(id) {
-      this.$router.push(`/goodbuy/${id}`)
+      this.$router.push(`/good-buy/${id}`)
     }
   }
 }

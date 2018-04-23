@@ -47,7 +47,7 @@ export default {
     },
 
     handleClick(id) {
-      this.$router.push(`/goodpre/${id}`)
+      this.$router.push(`/good-pre/${id}`)
     }
   }
 }

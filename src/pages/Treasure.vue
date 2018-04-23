@@ -55,7 +55,7 @@ export default {
     },
 
     handleClick(id) {
-      this.$router.push(`/goodtreasure/${id}`)
+      this.$router.push(`/good-treasure/${id}`)
     }
   }
 }
