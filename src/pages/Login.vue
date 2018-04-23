@@ -30,6 +30,7 @@ export default {
       this.password = ''
     },
     login() {
+      this.State.isLogin = true
       this.$router.push('/home')
     },
     goRegister() {

@@ -12,6 +12,10 @@ Vue.use(Lazyload)
 Vue.use(Icon)
 Vue.use(eventBus)
 
+Vue.prototype.State = {
+  isLogin: false
+}
+
 const router = new VueRouter({ routes })
 
 new Vue({

@@ -97,7 +97,7 @@ export default {
     },
 
     submit() {
-      Toast.success('订购成功')
+      this.State.isLogin ? Toast.success('订购成功') : this.$router.push('/login')
     }
   },
   beforeRouteEnter(to, from, next) {

@@ -39,6 +39,7 @@ export default {
       this.confirmPsw = ''
     },
     register() {
+      this.State.isLogin = true
       this.$router.push('/home')
     }
   }
