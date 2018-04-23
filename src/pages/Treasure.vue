@@ -9,7 +9,7 @@
       <van-cell title="开奖进度：" class="good-progress">
         <van-progress :percentage="item.progress" color="#f44" class="progress-data" />
       </van-cell>
-      <van-button @click="handleClick(item.id)" size="large" type="danger" class="good-btn">立即参与</van-button>
+      <van-button @click="handleClick(item.id)" size="normal" type="danger" class="good-btn">立即参与</van-button>
     </div>
   </van-list>
 </template>
@@ -55,7 +55,8 @@ export default {
     },
 
     handleClick(id) {
-      this.$router.push(`/goodpre/${id}`)
+      // this.$router.push(`/goodpre/${id}`)
+      console.log(id)
     }
   }
 }
