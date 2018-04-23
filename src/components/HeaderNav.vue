@@ -1,5 +1,7 @@
 <template>
-  <van-nav-bar :title="title" left-arrow @click-left="onClickLeft" />
+  <van-nav-bar :title="title" left-arrow @click-left="onClickLeft" @click-right="onClickRight">
+    <van-icon name="home" slot="right" />
+  </van-nav-bar>
 </template>
 
 <script>
@@ -14,6 +16,10 @@ export default {
   methods: {
     onClickLeft() {
       this.$router.back()
+    },
+
+    onClickRight() {
+      this.$router.replace('/home')
     }
   }
 }
