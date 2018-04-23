@@ -21,7 +21,7 @@
       </div>
     </div>
     <van-goods-action>
-      <van-goods-action-big-btn text="立即预购" primary />
+      <van-goods-action-big-btn text="立即下注" primary />
     </van-goods-action>
   </div>
 </template>
@@ -55,7 +55,8 @@ export default {
     this.id = this.$route.params.id
   },
   destroyed() {
-    this.$bus.$emit('show-footer')
+    const footerActiveIndex = 2
+    this.$bus.$emit('show-footer', footerActiveIndex)
   }
 }
 </script>

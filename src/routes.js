@@ -6,6 +6,7 @@ import Shop from './pages/Shop'
 import Treasure from './pages/Treasure'
 import GoodPre from './pages/GoodPre'
 import GoodBuy from './pages/GoodBuy'
+import GoodTreasure from './pages/GoodTreasure'
 
 export default [
   {
@@ -32,6 +33,10 @@ export default [
       {
         path: '/treasure',
         component: Treasure
+      },
+      {
+        path: '/goodtreasure/:id',
+        component: GoodTreasure
       }
     ]
   },
