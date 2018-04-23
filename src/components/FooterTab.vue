@@ -39,7 +39,7 @@ export default {
           this.$route.path !== '/treasure' && this.$router.push('/treasure')
           break
         case 3:
-          console.log('setting')
+          this.$route.path !== '/personal-center' && this.$router.push('/user-center')
           break
       }
     }
@@ -48,7 +48,8 @@ export default {
     const pathMap = {
       home: 0,
       shop: 1,
-      treasure: 2
+      treasure: 2,
+      'user-center': 3
     }
     let pathname = this.$route.path.slice(1)
     this.active = pathMap[pathname] || 0

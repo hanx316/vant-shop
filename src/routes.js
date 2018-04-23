@@ -8,6 +8,7 @@ import GoodPre from './pages/GoodPre'
 import GoodBuy from './pages/GoodBuy'
 import GoodTreasure from './pages/GoodTreasure'
 import WinnerHistory from './pages/WinnerHistory'
+import UserCenter from './pages/UserCenter'
 
 export default [
   {
@@ -42,6 +43,10 @@ export default [
       {
         path: '/winner-history/:id',
         component: WinnerHistory
+      },
+      {
+        path: '/user-center',
+        component: UserCenter
       }
     ]
   },
