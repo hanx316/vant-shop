@@ -99,13 +99,16 @@ export default {
       Toast.success('提交成功')
     }
   },
-  created() {
-    this.$bus.$emit('hide-footer')
-    this.id = this.$route.params.id
+  beforeRouteEnter(to, from, next) {
+    next(vm => {
+      vm.$bus.$emit('hide-footer')
+      vm.id = vm.$route.params.id
+    })
   },
-  destroyed() {
+  beforeRouteLeave(to, from, next) {
     const footerActiveIndex = 0
     this.$bus.$emit('show-footer', footerActiveIndex)
+    next()
   }
 }
 </script>
