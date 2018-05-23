@@ -9,7 +9,7 @@
     <div class="good-info-box">
       <div class="good-info">
         <div class="name">{{ name }}</div>
-        <div class="hot">热度：{{ hot }}</div>
+        <!-- <div class="hot">热度：{{ hot }}</div> -->
       </div>
       <p class="good-desc">{{ desc }}</p>
       <van-tag v-for="(tag, i) in tags" :key="i" mark type="danger" class="good-tag">{{ tag }}</van-tag>
@@ -17,7 +17,7 @@
     <div class="recommend-good-list">
       <div class="recommend-title">你可能会喜欢</div>
       <div class="recommend-goods">
-        <img v-for="(image, i) in recommends" :key="i" :src="image" @click="handleLikeClick(i)" class="recommend-image">
+        <img v-for="image in recommends" :key="image.id" :src="image.index_pic" @click="handleLikeClick(image.id)" class="recommend-image">
       </div>
     </div>
     <van-goods-action>
@@ -46,22 +46,25 @@ import {
   Toast
 } from 'vant'
 import HeaderNav from '@/components/HeaderNav'
+import api from '@/api'
+const { product } = api
 
 export default {
   data() {
     return {
       id: 0,
-      name: '商品名称',
+      name: '',
       hot: '1600',
-      desc: '这是一段产品描述文字这是一段产品描述文字这是一段产品描述文字这是一段产品描述文字这是一段产品描述文字这是一段产品描述文字这是一段产品描述文字',
-      tags: ['标签1', '标签标签2', '标签3', '标签4', '标签标签标签5', '标签标签6'],
-      images: ['static/good1.jpg', 'static/good2.jpg', 'static/good3.jpg', 'static/good4.jpg'],
-      recommends: ['static/goods.jpeg', 'static/goods.jpeg', 'static/goods.jpeg', 'static/goods.jpeg'],
+      desc: '',
+      tags: [],
+      images: [],
+      recommends: [],
       showPanel: false,
       username: '',
       wechat: ''
     }
   },
+
   components: {
     HeaderNav,
     [Swipe.name]: Swipe,
@@ -74,6 +77,31 @@ export default {
     [Button.name]: Button,
     [Toast.name]: Toast
   },
+
+  beforeRouteEnter(to, from, next) {
+    next(vm => {
+      vm.$bus.$emit('hide-footer')
+      vm.id = vm.$route.params.id
+    })
+  },
+
+  async mounted() {
+    const res = await product.getHomeProductDetail({ id: this.$route.params.id })
+    const data = res.data
+    this.id = data.id
+    this.name = data.product_name
+    this.desc = data.description
+    this.tags = data.tags
+    this.images = data.pic
+    this.recommends = res.recommend
+  },
+
+  beforeRouteLeave(to, from, next) {
+    const footerActiveIndex = 0
+    this.$bus.$emit('show-footer', footerActiveIndex)
+    next()
+  },
+
   methods: {
     handleLikeClick(index) {
       console.log(1)
@@ -98,17 +126,6 @@ export default {
     submit() {
       this.State.isLogin ? Toast.success('提交成功') : this.$router.push('/login')
     }
-  },
-  beforeRouteEnter(to, from, next) {
-    next(vm => {
-      vm.$bus.$emit('hide-footer')
-      vm.id = vm.$route.params.id
-    })
-  },
-  beforeRouteLeave(to, from, next) {
-    const footerActiveIndex = 0
-    this.$bus.$emit('show-footer', footerActiveIndex)
-    next()
   }
 }
 </script>

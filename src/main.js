@@ -13,13 +13,16 @@ Vue.use(Icon)
 Vue.use(eventBus)
 
 Vue.prototype.State = {
-  isLogin: false
+  isLogin: false,
+  token: ''
 }
 
 const router = new VueRouter({ routes })
 
-new Vue({
+const app = new Vue({
   el: '#app',
   router,
   render: h => h(App)
 })
+
+export default app
