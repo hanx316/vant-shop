@@ -59,6 +59,16 @@ app.use(devMiddleware)
 // compilation error display
 app.use(hotMiddleware)
 
+// mock
+var router = express.Router()
+var apiRoutes = require('../mock')
+
+apiRoutes.forEach(api => {
+  router[api.method](api.route, api.handler)
+})
+
+app.use('/', router)
+
 // serve pure static assets
 var staticPath = path.posix.join(config.dev.assetsPublicPath, config.dev.assetsSubDirectory)
 app.use(staticPath, express.static('./static'))
