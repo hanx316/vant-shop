@@ -103,12 +103,8 @@ export default {
   },
 
   methods: {
-    handleLikeClick(index) {
-      console.log(1)
-      this.$router.replace(`/good-pre/${index + 1}`, () => {
-        window.location.reload()
-        window.scroll(0, 0)
-      })
+    handleLikeClick(id) {
+      this.$router.push(`/good-pre/${id}`)
     },
 
     handlePreBuyClick() {

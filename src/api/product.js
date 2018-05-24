@@ -11,3 +11,9 @@ export function getHomeProductDetail(data) {
     return res.data
   })
 }
+
+export function getShopProductList(data) {
+  return $ax.get('/product/index', { params: data }).then(res => {
+    return res.data
+  })
+}

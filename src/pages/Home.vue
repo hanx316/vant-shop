@@ -37,11 +37,12 @@ export default {
         page: this.currentPage,
         pageSize: 10
       }).then(res => {
-        this.goods = res.items
+        this.pageCount = res.pager.totalCount
+        this.goods.push(...res.items)
         if (this.currentPage >= this.pageCount) {
           this.finished = true
         }
-        this.loading = false;
+        this.loading = false
         this.currentPage += 1
       })
     },

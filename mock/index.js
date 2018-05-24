@@ -8,5 +8,10 @@ module.exports = [
     route: '/index/detail',
     method: 'get',
     handler: require('./product').getHomeProductDetail
-  }
+  },
+  {
+    route: '/product/index',
+    method: 'get',
+    handler: require('./product').getShopProductList
+  },
 ]

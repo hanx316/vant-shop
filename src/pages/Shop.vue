@@ -2,9 +2,9 @@
   <van-list v-model="loading" :finished="finished" @load="onLoad" class="goods-list">
     <div class="goods-list-box">
       <div v-for="item in goods" :key="item.id" @click="handleClick(item.id)" class="good-box">
-        <img :src="item.img" class="good-pic">
-        <p class="good-info good-name">{{ item.name }}</p>
-        <p class="good-info good-desc">{{ item.desc }}</p>
+        <img :src="item.index_pic" class="good-pic">
+        <p class="good-info good-name">{{ item.product_name }}</p>
+        <p class="good-info good-desc">{{ item.description }}</p>
         <p class="good-info good-price">¥ {{ item.price }}</p>
       </div>
     </div>
@@ -13,13 +13,17 @@
 
 <script>
 import { CellGroup, List } from 'vant'
+import api from '@/api'
+const { product } = api
 
 export default {
   data() {
     return {
       goods: [],
       loading: false,
-      finished: false
+      finished: false,
+      currentPage: 1,
+      pageCount: 0
     }
   },
   components: {
@@ -28,25 +32,18 @@ export default {
   },
   methods: {
     onLoad() {
-      setTimeout(() => {
-        console.log('called')
-        for (let i = 0; i < 10; i++) {
-          let id = this.goods.length + 1
-          this.goods.push({
-            id,
-            name: `商品名称${id}`,
-            hot: `${1000 + id * 10}`,
-            img: 'static/goods.jpeg',
-            desc: '这是一段商品描述文字这是一段商品描述文字这是一段商品描述文字这是一段商品描述文字这是一段商品描述文字',
-            price: `${1000 + id * 10}`
-          });
+      product.getShopProductList({
+        page: this.currentPage,
+        pageSize: 10
+      }).then(res => {
+        this.pageCount = res.pager.totalCount
+        this.goods.push(...res.items)
+        if (this.currentPage >= this.pageCount) {
+          this.finished = true
         }
-        this.loading = false;
-
-        if (this.goods.length >= 20) {
-          this.finished = true;
-        }
-      }, 500);
+        this.loading = false
+        this.currentPage += 1
+      })
     },
 
     handleClick(id) {
