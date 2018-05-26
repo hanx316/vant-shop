@@ -24,10 +24,3 @@ export default {
   }
 }
 </script>
-
-<style>
-.shadow {
-  box-shadow: 3px 3px 3px #ccc;
-  margin-bottom: 10px;
-}
-</style>
