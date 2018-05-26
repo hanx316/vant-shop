@@ -11,3 +11,22 @@ export function signUp(data) {
     return res.data
   })
 }
+
+export function getOrderList(data) {
+  return $ax.get('/order/shop-list', data).then(res => {
+    return res.data
+  })
+}
+
+export function updateUserInfo(data) {
+  return $ax({
+    url: '/members/update',
+    method: 'POST',
+    headers: {
+      'Content-Type': 'multipart/form-data'
+    },
+    data
+  }).then(res => {
+    return res.data
+  })
+}

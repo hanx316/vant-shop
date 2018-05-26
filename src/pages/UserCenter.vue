@@ -2,17 +2,18 @@
   <div id="user-center-page">
     <div class="user-info">
       <div class="user-pic-box">
-        <img :src="avatar" class="user-pic">
+        <img v-if="avatar" :src="avatar" class="user-pic">
+        <span v-else class="user-avatar">{{ username | avatarName }}</span>
       </div>
       <div class="user-detail-box">
         <div class="user-detail">{{ username }}</div>
         <div class="user-detail user-id">用户ID: {{ userId }}</div>
       </div>
     </div>
-    <van-cell title="我的订单" class="shadow" is-link />
+    <van-cell title="我的订单(暂不支持)" class="shadow" is-link @click="goOrderList" />
     <van-cell-group>
-      <van-cell icon="edit" title="资料修改" is-link />
-      <van-cell icon="pending-evaluate" title="消息通知" class="shadow" is-link />
+      <van-cell icon="edit" title="资料修改" is-link @click="goUserDetail" />
+      <van-cell icon="pending-evaluate" title="消息通知(暂不支持)" class="shadow" is-link />
       <!-- <van-cell icon="like-o" title="分享" is-link /> -->
       <van-cell icon="setting" title="设置" class="shadow" is-link @click="goSetting" />
     </van-cell-group>
@@ -36,6 +37,12 @@ export default {
     }
   },
 
+  filters: {
+    avatarName(username) {
+      return username[0].toUpperCase()
+    }
+  },
+
   created() {
     !this.State.isLogin && this.$router.replace('/login')
     this.username = this.State.userInfo.member_name
@@ -46,6 +53,12 @@ export default {
   methods: {
     goSetting() {
       this.$router.push('/setting')
+    },
+    goOrderList() {
+      this.$router.push('/order-list')
+    },
+    goUserDetail() {
+      this.$router.push('/user-detail')
     }
   }
 }
@@ -55,7 +68,8 @@ export default {
 .user-info {
   display: flex;
   padding: 20px 15px;
-  background-image: linear-gradient(to right bottom, #38f, #f44);
+  background: #38f;
+  /* background-image: linear-gradient(to right bottom, #38f, #f44); */
 }
 .user-pic-box {
   width: 60px;
@@ -65,6 +79,17 @@ export default {
   width: 100%;
   height: 100%;
   border-radius: 50%;
+}
+.user-avatar {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  height: 100%;
+  background: rgb(28, 180, 160);
+  border-radius: 50%;
+  font-size: 36px;
+  color: #fff;
 }
 .user-detail-box {
   display: flex;

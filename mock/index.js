@@ -49,4 +49,14 @@ module.exports = [
     method: 'post',
     handler: require('./product').orderHomeProduct
   },
+  {
+    route: '/order/shop-list',
+    method: 'get',
+    handler: require('./user').getOrderList
+  },
+  {
+    route: '/members/update',
+    method: 'post',
+    handler: require('./user').updateUserInfo
+  },
 ]

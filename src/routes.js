@@ -10,6 +10,8 @@ import GoodTreasure from './pages/GoodTreasure'
 import WinnerHistory from './pages/WinnerHistory'
 import UserCenter from './pages/UserCenter'
 import Setting from './pages/Setting'
+import OrderList from './pages/OrderList'
+import UserDetail from './pages/UserDetail'
 
 export default [
   {
@@ -52,6 +54,14 @@ export default [
       {
         path: '/setting',
         component: Setting
+      },
+      {
+        path: '/order-list',
+        component: OrderList
+      },
+      {
+        path: '/user-detail',
+        component: UserDetail
       }
     ]
   },
