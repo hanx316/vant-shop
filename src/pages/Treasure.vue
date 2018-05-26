@@ -1,13 +1,13 @@
 <template>
   <van-list v-model="loading" :finished="finished" @load="onLoad" class="goods-list">
     <div v-for="item in goods" :key="item.id" class="good-box">
-      <img :src="item.img" class="good-pic">
+      <img :src="item.product.index_pic" class="good-pic">
       <div class="good-info">
-        <span class="good-name">[进行中] {{ item.name }}</span>
-        <span class="hot-point">热度：{{ item.hot }}</span>
+        <span class="good-name">[{{ item.finish === 0 ? '进行中' : '已完成' }}] {{ item.product.product_name }}</span>
+        <!-- <span class="hot-point">热度：{{ item.hot }}</span> -->
       </div>
       <van-cell title="开奖进度：" class="good-progress">
-        <van-progress :percentage="item.progress" color="#f44" class="progress-data" />
+        <van-progress :show-pivot="showProgressTxt(item)" :percentage="calProgress(item)" color="#f44" class="progress-data" />
       </van-cell>
       <van-button @click="handleClick(item.id)" size="normal" type="danger" class="good-btn">立即参与</van-button>
     </div>
@@ -16,15 +16,10 @@
 
 <script>
 import { CellGroup, Cell, List, Progress, Button } from 'vant'
+import api from '@/api'
+const { product } = api
 
 export default {
-  data() {
-    return {
-      goods: [],
-      loading: false,
-      finished: false
-    }
-  },
   components: {
     [CellGroup.name]: CellGroup,
     [Cell.name]: Cell,
@@ -32,30 +27,45 @@ export default {
     [Progress.name]: Progress,
     [Button.name]: Button
   },
+
+  data() {
+    return {
+      goods: [],
+      loading: false,
+      finished: false,
+      currentPage: 1,
+      pageCount: 0
+    }
+  },
+  
   methods: {
     onLoad() {
-      setTimeout(() => {
-        console.log('called')
-        for (let i = 0; i < 10; i++) {
-          let id = this.goods.length + 1
-          this.goods.push({
-            id,
-            name: `商品名称${id}`,
-            hot: `${1000 + id * 10}`,
-            img: 'static/goods.jpeg',
-            progress: 30
-          });
+      product.getTreasureList({
+        page: this.currentPage,
+        pageSize: 10
+      }).then(res => {
+        this.pageCount = res.pager.totalCount
+        this.goods.push(...res.items)
+        if (this.currentPage >= this.pageCount) {
+          this.finished = true
         }
-        this.loading = false;
-
-        if (this.goods.length >= 20) {
-          this.finished = true;
-        }
-      }, 500);
+        this.loading = false
+        this.currentPage += 1
+      })
     },
-
     handleClick(id) {
       this.$router.push(`/good-treasure/${id}`)
+    },
+    calProgress(item) {
+      if (item.finish === 1) return 100
+      let startTime = (new Date(item.start_time)).getTime()
+      let endTime = (new Date(item.end_time)).getTime()
+      let outTime = item.out_time_int
+      let totalTime = (endTime - startTime) / 1000
+      return ((totalTime - outTime) / totalTime).toFixed(2) * 100
+    },
+    showProgressTxt(item) {
+      return !Boolean(item.finish)
     }
   }
 }

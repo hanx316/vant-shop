@@ -2,6 +2,7 @@ const Mockjs = require('mockjs')
 let id = 2
 let homeListReqTime = 1
 let shopListReqTime = 1
+let treasureListReqTime = 1
 
 module.exports = {
   getHomeProductList(req, res) {
@@ -122,5 +123,55 @@ module.exports = {
         "index_pic": "/static/goods.jpeg"
       }
     })
+  },
+
+  getTreasureList(req, res) {
+    let startId = treasureListReqTime > 1 ? (treasureListReqTime * 10 - 9) : treasureListReqTime
+    res.json(Mockjs.mock({
+      "items|10": [{
+        "id|+1": startId,
+        "product_id|+1": startId,
+        "prize_sn": "201804270001",
+        "start_time": "2018-04-18 09:02:00",
+        "end_time": "2018-04-24 18:00:00",
+        "total_price": "240.00",
+        "total_number": 120,
+        "join_price": 2,
+        "upper_limit": 2,
+        "finish": '@natural(0, 1)',
+        "set_prize": 0,
+        "join_number": 120,
+        "prize_number": "100000118",
+        "prize_time": "2018-04-22 13:49:36",
+        "product": {
+          "id|+1": startId,
+          "product_name": "电话充值卡",
+          "pic": [
+            "/static/good1.jpg"
+          ],
+          "detail": "充值卡限时抢购",
+          "price": 130,
+          "tags": ["充值卡", "话费", "电信"],
+          "description": "",
+          "index_pic": "/static/goods.jpeg"
+        },
+        "out_time": "22天3时29分",
+        "out_time_int": 55000 
+      }],
+      "_links": {
+        "self": {
+          "href": "http://www.api.com/prize/index/2?access-token=sAytZUwzXUnQOcXCJrRze5wIcaiuNlCO&page=1&per-page=15"
+        }
+      },
+      "pager": {
+        "totalCount": 3,
+        "pageCount": 1,
+        "currentPage": 1,
+        "perPage": 10
+      },
+      "code": 0, 
+      "message": "success"
+    }))
+    treasureListReqTime += 1
   }
 }

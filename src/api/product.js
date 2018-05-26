@@ -23,3 +23,9 @@ export function getShopProductDetail(data) {
     return res.data
   })
 }
+
+export function getTreasureList(data) {
+  return $ax.get('/prize/index', { params: data }).then(res => {
+    return res.data
+  })
+}
