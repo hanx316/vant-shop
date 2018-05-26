@@ -14,7 +14,7 @@
       <van-cell icon="edit" title="资料修改" is-link />
       <van-cell icon="pending-evaluate" title="消息通知" class="shadow" is-link />
       <!-- <van-cell icon="like-o" title="分享" is-link /> -->
-      <van-cell icon="setting" title="设置" class="shadow" is-link />
+      <van-cell icon="setting" title="设置" class="shadow" is-link @click="goSetting" />
     </van-cell-group>
   </div>
 </template>
@@ -41,6 +41,12 @@ export default {
     this.username = this.State.userInfo.member_name
     this.userId = this.State.userInfo.id
     this.avatar = this.State.userInfo.avatar
+  },
+
+  methods: {
+    goSetting() {
+      this.$router.push('/setting')
+    }
   }
 }
 </script>

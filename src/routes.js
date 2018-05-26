@@ -9,6 +9,7 @@ import GoodBuy from './pages/GoodBuy'
 import GoodTreasure from './pages/GoodTreasure'
 import WinnerHistory from './pages/WinnerHistory'
 import UserCenter from './pages/UserCenter'
+import Setting from './pages/Setting'
 
 export default [
   {
@@ -47,6 +48,10 @@ export default [
       {
         path: '/user-center',
         component: UserCenter
+      },
+      {
+        path: '/setting',
+        component: Setting
       }
     ]
   },
