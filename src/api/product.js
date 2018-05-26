@@ -17,3 +17,9 @@ export function getShopProductList(data) {
     return res.data
   })
 }
+
+export function getShopProductDetail(data) {
+  return $ax.get('/product/detail', { params: data }).then(res => {
+    return res.data
+  })
+}

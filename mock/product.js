@@ -99,5 +99,28 @@ module.exports = {
       "message": "success"
     }))
     shopListReqTime += 1
+  },
+
+  getShopProductDetail(req, res) {
+    res.json({
+      "code": 0,
+      "data": {
+        "id": 2,
+        "product_name": "诺基亚",
+        "pic": [
+          "/static/good1.jpg",
+          "/static/good2.jpg",
+          "/static/good3.jpg",
+          "/static/good4.jpg",
+        ],
+        "detail": "sdasdsa",
+        "price": 1000,
+        "tags": [
+          "砖头"
+        ],
+        "description": "是大大大大大师",
+        "index_pic": "/static/goods.jpeg"
+      }
+    })
   }
 }

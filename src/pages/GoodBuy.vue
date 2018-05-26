@@ -26,7 +26,7 @@
     </van-goods-action>
     <van-actionsheet v-model="showPanel" title="填写订单信息" class="buy-panel">
       <div class="buy-form">
-        <van-card :thumb="images[0]" class="buy-good-info">
+        <van-card :thumb="thumb" class="buy-good-info">
           <div slot="title" class="buy-good-info-price">¥ {{ price }}</div>
           <div slot="desc">{{ name }}</div>
         </van-card>
@@ -55,28 +55,10 @@ import {
   Toast
 } from 'vant'
 import HeaderNav from '@/components/HeaderNav'
+import api from '@/api'
+const { product } = api
 
 export default {
-  data() {
-    return {
-      id: 0,
-      name: '商品名称',
-      hot: '1600',
-      price: '1600',
-      desc: '这是一段产品描述文字这是一段产品描述文字这是一段产品描述文字这是一段产品描述文字这是一段产品描述文字这是一段产品描述文字这是一段产品描述文字',
-      tags: ['标签1', '标签标签2', '标签3', '标签4', '标签标签标签5', '标签标签6'],
-      images: ['static/good1.jpg', 'static/good2.jpg', 'static/good3.jpg', 'static/good4.jpg'],
-      details: ['static/goods.jpeg', 'static/goods.jpeg', 'static/goods.jpeg', 'static/goods.jpeg'],
-      showPanel: false,
-      buyCount: 1
-    }
-  },
-  computed: {
-    totalPrice() {
-      let price = Number(this.price)
-      return price * this.buyCount
-    }
-  },
   components: {
     HeaderNav,
     [Swipe.name]: Swipe,
@@ -91,25 +73,63 @@ export default {
     [Button.name]: Button,
     [Toast.name]: Toast
   },
-  methods: {
-    handleBuyClick() {
-      this.showPanel = true
-    },
 
-    submit() {
-      this.State.isLogin ? Toast.success('订购成功') : this.$router.push('/login')
+  data() {
+    return {
+      id: 0,
+      name: '',
+      hot: '',
+      price: '',
+      desc: '',
+      tags: [],
+      thumb: '',
+      images: [],
+      details: [],
+      showPanel: false,
+      buyCount: 1
     }
   },
+
+  computed: {
+    totalPrice() {
+      let price = Number(this.price)
+      return price * this.buyCount
+    }
+  },
+
   beforeRouteEnter(to, from, next) {
     next(vm => {
       vm.$bus.$emit('hide-footer')
       vm.id = vm.$route.params.id
     })
   },
+
+  async mounted() {
+    const res = await product.getShopProductDetail({ id: this.$route.params.id })
+    const data = res.data
+    this.id = data.id
+    this.name = data.product_name
+    this.price = data.price
+    this.desc = data.description
+    this.tags = data.tags
+    this.thumb = data.index_pic
+    this.images = data.pic
+    this.details = data.pic
+  },
+
   beforeRouteLeave(to, from, next) {
     const footerActiveIndex = 1
     this.$bus.$emit('show-footer', footerActiveIndex)
     next()
+  },
+  
+  methods: {
+    handleBuyClick() {
+      this.showPanel = true
+    },
+    submit() {
+      this.State.isLogin ? Toast.success('订购成功') : this.$router.push('/login')
+    }
   }
 }
 </script>

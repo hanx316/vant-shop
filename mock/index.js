@@ -14,4 +14,9 @@ module.exports = [
     method: 'get',
     handler: require('./product').getShopProductList
   },
+  {
+    route: '/product/detail',
+    method: 'get',
+    handler: require('./product').getShopProductDetail
+  },
 ]
