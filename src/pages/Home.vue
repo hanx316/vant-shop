@@ -16,6 +16,11 @@ import api from '@/api'
 const { product } = api
 
 export default {
+  components: {
+    [CellGroup.name]: CellGroup,
+    [List.name]: List
+  },
+
   data() {
     return {
       goods: [],
@@ -24,11 +29,6 @@ export default {
       currentPage: 1,
       pageCount: 0
     }
-  },
-
-  components: {
-    [CellGroup.name]: CellGroup,
-    [List.name]: List
   },
 
   methods: {
