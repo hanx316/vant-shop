@@ -29,4 +29,14 @@ module.exports = [
     method: 'get',
     handler: require('./product').getTreasureDetail
   },
+  {
+    route: '/site/login',
+    method: 'post',
+    handler: require('./user').signIn
+  },
+  {
+    route: '/site/register',
+    method: 'post',
+    handler: require('./user').signUp
+  },
 ]

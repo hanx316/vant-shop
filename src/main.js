@@ -12,9 +12,16 @@ Vue.use(Lazyload)
 Vue.use(Icon)
 Vue.use(eventBus)
 
+const userInfoStorage = window.localStorage.getItem('X_USER_INFO')
+let userInfo = {}
+if (userInfoStorage) {
+  userInfo = JSON.parse(userInfoStorage)
+}
+
 Vue.prototype.State = {
-  isLogin: false,
-  token: ''
+  isLogin: !!userInfo.access_token,
+  token: userInfo.access_token || '',
+  userInfo
 }
 
 const router = new VueRouter({ routes })

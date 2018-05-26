@@ -9,19 +9,24 @@
 </template>
 
 <script>
-import { Button, Field } from 'vant'
+import { Button, Field, Toast } from 'vant'
+import api from '@/api'
+const { user } = api
 
 export default {
+  components: {
+    [Button.name]: Button,
+    [Field.name]: Field,
+    [Toast.name]: Toast
+  },
+
   data() {
     return {
       mobile: '',
       password: ''
     }
   },
-  components: {
-    [Button.name]: Button,
-    [Field.name]: Field
-  },
+  
   methods: {
     clearMobile() {
       this.mobile = ''
@@ -30,11 +35,47 @@ export default {
       this.password = ''
     },
     login() {
-      this.State.isLogin = true
-      this.$router.push('/home')
+      if (!this.validate()) return
+      user.signIn({
+        telephone: this.mobile,
+        password: this.password.trim()
+      }).then(res => {
+        res.code === 0 ? this.handleSuccess(res) : this.handleFail(res)
+      })
     },
     goRegister() {
       this.$router.push('/register')
+    },
+    validate() {
+      const mobileReg = /^(13[0-9]|14[579]|15[0-3,5-9]|16[6]|17[0135678]|18[0-9]|19[89])\d{8}$/
+      if (!this.mobile) {
+        this.showToast('fail', '请输入手机号')
+        return false
+      }
+      if (!this.password) {
+        this.showToast('fail', '请输入密码')
+        return false
+      }
+      if (!mobileReg.test(this.mobile)) {
+        this.showToast('fail', '手机号格式不正确')
+        return false
+      }
+      return true
+    },
+    handleSuccess(res) {
+      this.State.isLogin = true
+      this.State.token = res.userInfo.access_token
+      window.localStorage.setItem('X_USER_INFO', JSON.stringify(res.userInfo))
+      this.$router.push('/home')
+    },
+    handleFail(res) {
+      this.showToast('fail', res.message)
+    },
+    showToast(type, msg) {
+      Toast[type]({
+        duration: 1500,
+        message: msg
+      })
     }
   }
 }
