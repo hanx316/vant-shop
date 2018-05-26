@@ -39,4 +39,9 @@ module.exports = [
     method: 'post',
     handler: require('./user').signUp
   },
+  {
+    route: '/prize/history',
+    method: 'get',
+    handler: require('./product').getTreasureHistory
+  }
 ]

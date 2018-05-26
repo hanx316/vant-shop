@@ -1,15 +1,15 @@
 <template>
   <div id="winner-history-page">
     <header-nav title="往期揭晓" />
-    <van-panel title="期号:100000 揭晓时间：2018-04-03 15:14" class="history-panel">
+    <van-panel v-for="history in histories" :key="history.id" :title="`期号:${history.id} 揭晓时间：${history.prize_time}`" class="history-panel">
       <div class="history-info">
         <div class="winner-pic-box">
-          <img src="static/goods.jpeg" class="winner-pic">
+          <img :src="history.avatar" class="winner-pic">
         </div>
         <div class="winner-info-box">
-          <span class="winner-info">获奖者：xxx</span>
-          <span class="winner-info">用户ID：1212121212</span>
-          <span class="winner-info">幸运号码：12121212121</span>
+          <span class="winner-info">获奖者：{{ history.member_name }}</span>
+          <span class="winner-info">用户ID：{{ history.member_id }}</span>
+          <span class="winner-info">幸运号码：{{ history.prize_number }}</span>
         </div>
       </div>
     </van-panel>
@@ -19,16 +19,32 @@
 <script>
 import { Panel } from 'vant'
 import HeaderNav from '@/components/HeaderNav'
+import api from '@/api'
+const { product } = api
 
 export default {
   components: {
     HeaderNav,
     [Panel.name]: Panel
   },
+
+  data() {
+    return {
+      histories: []
+    }
+  },
+
   beforeRouteEnter(to, from, next) {
     next(vm => {
       vm.$bus.$emit('hide-footer')
       vm.id = vm.$route.params.id
+    })
+  },
+
+  created() {
+    product.getTreasureHistory({ id: this.$route.params.id }).then(res => {
+      if (res.code !== 0) return
+      this.histories = res.items
     })
   }
 }

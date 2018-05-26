@@ -20,5 +20,5 @@ module.exports = {
       code: 0,
       message: '注册成功'
     })
-  }
+  },
 }

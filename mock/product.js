@@ -240,5 +240,29 @@ module.exports = {
         }
       ]
     })
-  }
+  },
+
+  getTreasureHistory(req, res) {
+    res.json({
+      "items": [{
+        "id": "3",
+        "prize_number": "100000118",
+        "member_id": "1",
+        "member_name": "王麻子",
+        "telephone": "138****8288",
+        "avatar": "static/goods.jpeg",
+        "prize_time": "2018-04-22 13:49:36",
+        "order_sn": "0506192305363764",
+        "last_ip": "0"
+      }],
+      "_meta": {
+        "totalCount": 1,
+        "pageCount": 1,
+        "currentPage": 1,
+        "perPage": 15
+      },
+      "code": 0,
+      "message": "success"
+    })
+  },
 }
