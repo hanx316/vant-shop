@@ -29,3 +29,9 @@ export function getTreasureList(data) {
     return res.data
   })
 }
+
+export function getTreasureDetail(data) {
+  return $ax.get('/prize/detail', { params: data }).then(res => {
+    return res.data
+  })
+}

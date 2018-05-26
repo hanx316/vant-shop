@@ -11,14 +11,14 @@
         <div class="name">{{ name }}</div>
       </div>
       <p class="good-desc">{{ desc }}</p>
-      <van-progress :percentage="progress" color="#f44" class="good-progress" />
+      <van-progress v-if="this.startTime && this.endTime" :show-pivot="showProgressTxt" :percentage="progress" color="#f44" class="good-progress" />
       <div class="treasure-info-panel">
         <div class="treasure-target treasure-info">
           <span>¥{{ target }}</span>
           <span>目标金额</span>
         </div>
         <div class="treasure-countdown treasure-info">
-          <span>{{ countdown }}天</span>
+          <span>{{ countdown }}</span>
           <span>剩余时间</span>
         </div>
         <div class="treasure-people treasure-info">
@@ -28,18 +28,10 @@
       </div>
     </div>
     <van-cell title="往期开奖结果" class="treasure-history" @click="onClickHistory" is-link />
-    <van-steps direction="vertical" >
-      <van-step>
-        <h3>xxxx 参与了</h3>
-        <p>2016-07-12 12:40</p>
-      </van-step>
-      <van-step>
-        <h3>xxxx 参与了</h3>
-        <p>2016-07-11 10:00</p>
-      </van-step>
-      <van-step>
-        <h3>xxxx 参与了</h3>
-        <p>2016-07-10 09:30</p>
+    <van-steps direction="vertical">
+      <van-step v-for="joiner in joiners" :key="joiner.id">
+        <h3>{{ joiner.member_name }} 参与了</h3>
+        <p>{{ joiner.pay_time }}</p>
       </van-step>
     </van-steps>
     <van-goods-action class="btn-bottom">
@@ -75,28 +67,10 @@ import {
   Toast
 } from 'vant'
 import HeaderNav from '@/components/HeaderNav'
+import api from '@/api'
+const { product } = api
 
 export default {
-  data() {
-    return {
-      id: 0,
-      name: '商品名称',
-      desc: '这是一段产品描述文字这是一段产品描述文字这是一段产品描述文字这是一段产品描述文字这是一段产品描述文字这是一段产品描述文字这是一段产品描述文字',
-      progress: 30,
-      target: '10000',
-      countdown: 29,
-      support: 146,
-      images: ['static/good1.jpg', 'static/good2.jpg', 'static/good3.jpg', 'static/good4.jpg'],
-      showPanel: false,
-      unitPrice: 3,
-      betCount: 1
-    }
-  },
-  computed: {
-    totalPrice() {
-      return this.unitPrice * this.betCount
-    }
-  },
   components: {
     HeaderNav,
     [Swipe.name]: Swipe,
@@ -113,29 +87,87 @@ export default {
     [Button.name]: Button,
     [Toast.name]: Toast
   },
-  methods: {
-    onClickHistory() {
-      this.$router.push(`/winner-history/${this.id}`)
-    },
 
-    handleBetClick() {
-      this.showPanel = true
-    },
-
-    submit() {
-      this.State.isLogin ? Toast.success('投注成功') : this.$router.push('/login')
+  data() {
+    return {
+      id: 0,
+      name: '',
+      desc: '',
+      target: '',
+      countdown: '0',
+      support: 0,
+      images: [],
+      showPanel: false,
+      unitPrice: 3,
+      betCount: 1,
+      joiners: [],
+      finish: 0,
+      startTime: '',
+      endTime: '',
+      outTime: 0,
+      progress: 0
     }
   },
+
+  computed: {
+    totalPrice() {
+      return this.unitPrice * this.betCount
+    },
+    showProgressTxt() {
+      return !Boolean(this.finish)
+    }
+  },
+
   beforeRouteEnter(to, from, next) {
     next(vm => {
       vm.$bus.$emit('hide-footer')
       vm.id = vm.$route.params.id
     })
   },
+
+  async mounted() {
+    const res = await product.getTreasureDetail({ id: this.$route.params.id })
+    const data = res.data
+    const productData = data.product
+    this.joiners = res.join_list
+    this.name = productData.product_name
+    this.desc = productData.description
+    this.target = data.total_price
+    this.countdown = data.out_time
+    this.support = data.join_number
+    this.images = productData.pic
+    this.unitPrice = data.join_price
+    this.finish = data.finish
+    this.startTime = data.start_time
+    this.endTime = data.end_time
+    this.outTime = data.out_time_int
+    this.progress = this.calProgress()
+  },
+
   beforeRouteLeave(to, from, next) {
     const footerActiveIndex = 2
     this.$bus.$emit('show-footer', footerActiveIndex)
     next()
+  },
+  
+  methods: {
+    onClickHistory() {
+      this.$router.push(`/winner-history/${this.id}`)
+    },
+    handleBetClick() {
+      this.showPanel = true
+    },
+    submit() {
+      this.State.isLogin ? Toast.success('投注成功') : this.$router.push('/login')
+    },
+    calProgress() {
+      if (this.finish === 1) return 100
+      let startTime = (new Date(this.startTime)).getTime()
+      let endTime = (new Date(this.endTime)).getTime()
+      let outTime = this.outTime
+      let totalTime = (endTime - startTime) / 1000
+      return ((totalTime - outTime) / totalTime).toFixed(2) * 100
+    },
   }
 }
 </script>

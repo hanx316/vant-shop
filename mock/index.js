@@ -24,4 +24,9 @@ module.exports = [
     method: 'get',
     handler: require('./product').getTreasureList
   },
+  {
+    route: '/prize/detail',
+    method: 'get',
+    handler: require('./product').getTreasureDetail
+  },
 ]
