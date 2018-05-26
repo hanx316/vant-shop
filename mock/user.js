@@ -9,7 +9,7 @@ module.exports = {
         "member_name": "李四",
         "sex": 1,
         "address": "",
-        "avatar": "/attachment/memberAvatar/20180506/2018050612053000000015.png",
+        "avatar": "/static/good3.jpg",
         "access_token": "DB3HBUwmXh2yj5iOy6PBMwbCrs8aaOwp"
       }
     })

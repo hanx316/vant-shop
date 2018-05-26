@@ -65,6 +65,7 @@ export default {
     handleSuccess(res) {
       this.State.isLogin = true
       this.State.token = res.userInfo.access_token
+      this.State.userInfo = res.userInfo
       window.localStorage.setItem('X_USER_INFO', JSON.stringify(res.userInfo))
       this.$router.push('/home')
     },

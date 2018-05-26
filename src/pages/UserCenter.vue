@@ -2,18 +2,18 @@
   <div id="user-center-page">
     <div class="user-info">
       <div class="user-pic-box">
-        <img src="static/goods.jpeg" class="user-pic">
+        <img :src="avatar" class="user-pic">
       </div>
       <div class="user-detail-box">
-        <div class="user-detail">用户昵称</div>
-        <div class="user-detail user-id">用户id12121212</div>
+        <div class="user-detail">{{ username }}</div>
+        <div class="user-detail user-id">用户ID: {{ userId }}</div>
       </div>
     </div>
     <van-cell title="我的订单" class="shadow" is-link />
     <van-cell-group>
       <van-cell icon="edit" title="资料修改" is-link />
       <van-cell icon="pending-evaluate" title="消息通知" class="shadow" is-link />
-      <van-cell icon="like-o" title="分享" is-link />
+      <!-- <van-cell icon="like-o" title="分享" is-link /> -->
       <van-cell icon="setting" title="设置" class="shadow" is-link />
     </van-cell-group>
   </div>
@@ -26,6 +26,21 @@ export default {
   components: {
     [CellGroup.name]: CellGroup,
     [Cell.name]: Cell
+  },
+
+  data() {
+    return {
+      username: '',
+      userId: 0,
+      avatar: ''
+    }
+  },
+
+  created() {
+    !this.State.isLogin && this.$router.replace('/login')
+    this.username = this.State.userInfo.member_name
+    this.userId = this.State.userInfo.id
+    this.avatar = this.State.userInfo.avatar
   }
 }
 </script>
