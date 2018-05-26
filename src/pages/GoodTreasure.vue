@@ -127,6 +127,7 @@ export default {
 
   async mounted() {
     const res = await product.getTreasureDetail({ id: this.$route.params.id })
+    if (res.code !== 0) return
     const data = res.data
     const productData = data.product
     this.joiners = res.join_list

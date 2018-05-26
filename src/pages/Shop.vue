@@ -36,6 +36,7 @@ export default {
         page: this.currentPage,
         pageSize: 10
       }).then(res => {
+        if (res.code !== 0) return
         this.pageCount = res.pager.totalCount
         this.goods.push(...res.items)
         if (this.currentPage >= this.pageCount) {

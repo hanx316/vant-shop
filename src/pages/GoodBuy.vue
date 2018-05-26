@@ -106,6 +106,7 @@ export default {
 
   async mounted() {
     const res = await product.getShopProductDetail({ id: this.$route.params.id })
+    if (res.code !== 0) return
     const data = res.data
     this.id = data.id
     this.name = data.product_name
