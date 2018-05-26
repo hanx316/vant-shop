@@ -265,4 +265,11 @@ module.exports = {
       "message": "success"
     })
   },
+
+  orderHomeProduct(req, res) {
+    res.json({
+      code: 0,
+      message: '提交成功'
+    })
+  },
 }

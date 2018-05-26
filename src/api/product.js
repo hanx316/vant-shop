@@ -41,3 +41,9 @@ export function getTreasureHistory(data) {
     return res.data
   })
 }
+
+export function orderHomeProduct(data) {
+  return $ax.post('/order/pre-buy', data).then(res => {
+    return res.data
+  })
+}

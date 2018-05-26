@@ -43,5 +43,10 @@ module.exports = [
     route: '/prize/history',
     method: 'get',
     handler: require('./product').getTreasureHistory
-  }
+  },
+  {
+    route: '/order/pre-buy',
+    method: 'post',
+    handler: require('./product').orderHomeProduct
+  },
 ]

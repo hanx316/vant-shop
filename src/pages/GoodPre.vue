@@ -25,8 +25,8 @@
     </van-goods-action>
     <van-actionsheet v-model="showPanel" title="填写预约信息" class="pre-buy-panel">
       <div class="pre-buy-form">
-        <van-field v-model="username" label="昵称" icon="clear" @click-icon="onClearUsername" required />
-        <van-field v-model="wechat" label="微信ID" icon="clear" @click-icon="onClearWechat" required />
+        <van-field v-model="username" label="联系人" icon="clear" @click-icon="onClearUsername" required />
+        <van-field v-model="mobile" label="微信/手机号" icon="clear" @click-icon="onClearMobile" required />
         <van-button size="large" type="danger" @click="submit" class="submit-btn">提交预约信息</van-button>
       </div>
     </van-actionsheet>
@@ -50,21 +50,6 @@ import api from '@/api'
 const { product } = api
 
 export default {
-  data() {
-    return {
-      id: 0,
-      name: '',
-      hot: '1600',
-      desc: '',
-      tags: [],
-      images: [],
-      recommends: [],
-      showPanel: false,
-      username: '',
-      wechat: ''
-    }
-  },
-
   components: {
     HeaderNav,
     [Swipe.name]: Swipe,
@@ -76,6 +61,21 @@ export default {
     [Field.name]: Field,
     [Button.name]: Button,
     [Toast.name]: Toast
+  },
+
+  data() {
+    return {
+      id: 0,
+      name: '',
+      hot: '1600',
+      desc: '',
+      tags: [],
+      images: [],
+      recommends: [],
+      showPanel: false,
+      username: '',
+      mobile: ''
+    }
   },
 
   beforeRouteEnter(to, from, next) {
@@ -107,21 +107,55 @@ export default {
     handleLikeClick(id) {
       this.$router.push(`/good-pre/${id}`)
     },
-
     handlePreBuyClick() {
       this.showPanel = true
     },
-
     onClearUsername() {
       this.username = ''
     },
-
-    onClearWechat() {
-      this.wechat = ''
+    onClearMobile() {
+      this.mobile = ''
     },
-
     submit() {
-      this.State.isLogin ? Toast.success('提交成功') : this.$router.push('/login')
+      this.State.isLogin ? this.handleSubmit() : this.$router.push('/login')
+    },
+    handleSubmit() {
+      if (!this.validate()) return
+      product.orderHomeProduct({
+        product_id: this.id,
+        mobile: this.mobile,
+        consignee: this.username
+      }).then(res => {
+        res.code === 0 ? this.handleSuccess(res) : this.handleFail(res)
+      })
+    },
+    validate() {
+      if (!this.username) {
+        this.showToast('fail', '请输入联系人')
+        return false
+      }
+      if (!this.mobile) {
+        this.showToast('fail', '请输入微信或手机号')
+        return false
+      }
+      return true
+    },
+    handleSuccess(res) {
+      this.showToast('success', '提交成功', 0, true)
+      setTimeout(() => {
+        Toast.clear()
+        location.reload()
+      }, 1500)
+    },
+    handleFail(res) {
+      this.showToast('fail', res.message)
+    },
+    showToast(type, msg, time = 1500, showMask = false) {
+      Toast[type]({
+        duration: time,
+        message: msg,
+        mask: showMask
+      })
     }
   }
 }
