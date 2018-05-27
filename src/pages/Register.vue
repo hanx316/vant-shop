@@ -48,7 +48,7 @@ export default {
       user.signUp({
         member_name: this.nickname,
         telephone: this.mobile,
-        passowrd: this.password.trim(),
+        password: this.password.trim(),
         repassword: this.confirmPsw.trim()
       }).then(res => {
         res.code === 0? this.handleSuccess(res) : this.handleFail(res)

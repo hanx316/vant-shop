@@ -59,11 +59,10 @@ export default {
     },
     calProgress(item) {
       if (item.finish === 1) return 100
-      let startTime = (new Date(item.start_time)).getTime()
-      let endTime = (new Date(item.end_time)).getTime()
-      let outTime = item.out_time_int
-      let totalTime = (endTime - startTime) / 1000
-      return ((totalTime - outTime) / totalTime).toFixed(2) * 100
+      let join = item.join_number
+      let total = item.total_number
+      let res = ((join / total) * 100).toFixed(1)
+      return res
     },
     showProgressTxt(item) {
       return !Boolean(item.finish)

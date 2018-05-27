@@ -60,7 +60,7 @@ export default {
   methods: {
     onRead(file) {
       console.log(file)
-      this.file = file
+      this.file = file.file
     },
     resetData() {
       this.username = ''
@@ -87,8 +87,9 @@ export default {
           if (res.code === 0) {
             Toast.success({
               duration: 1500,
-              message: '提交成功'
+              message: '修改成功'
             })
+            this.State.updateInfo(res.info)
             this.resetData()
           } else {
             Toast.fail({

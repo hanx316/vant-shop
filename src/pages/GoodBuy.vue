@@ -17,9 +17,10 @@
     </div>
     <div class="recommend-good-list">
       <div class="recommend-title">产品详情图片</div>
-      <div class="recommend-goods">
+      <div class="special-product-detail" v-html="details"></div>
+      <!-- <div class="recommend-goods">
         <img v-for="(image, i) in details" :key="i" :src="image" class="recommend-image">
-      </div>
+      </div> -->
     </div>
     <van-goods-action>
       <van-goods-action-big-btn @click="handleBuyClick" text="立即下单" primary />
@@ -84,7 +85,7 @@ export default {
       tags: [],
       thumb: '',
       images: [],
-      details: [],
+      details: '',
       showPanel: false,
       buyCount: 1
     }
@@ -115,7 +116,7 @@ export default {
     this.tags = data.tags
     this.thumb = data.index_pic
     this.images = data.pic
-    this.details = data.pic
+    this.details = data.detail || ''
   },
 
   beforeRouteLeave(to, from, next) {
@@ -129,7 +130,8 @@ export default {
       this.showPanel = true
     },
     submit() {
-      this.State.isLogin ? Toast.success('订购成功') : this.$router.push('/login')
+      // this.State.isLogin ? Toast.success('订购成功') : this.$router.push('/login')
+      location.href = 'alipayqr://platformapi/startapp?saId=10000007&qrcode=HTTPS://QR.ALIPAY.COM/FKX09109CPQQ9JI38FGH06'
     }
   }
 }
@@ -182,10 +184,10 @@ export default {
   margin-bottom: 10px;
   font-weight: 600;
 }
-.recommend-goods {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: space-between;
+.special-product-detail {
+  width: 100%;
+  max-width: 100%;
+  overflow: hidden;
 }
 .recommend-image {
   width: 48%;

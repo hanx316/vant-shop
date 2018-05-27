@@ -17,6 +17,9 @@ $ax.interceptors.request.use(config => {
 })
 
 $ax.interceptors.response.use(res => {
+  if (res.data.code === -2) {
+    app.$router.replace('/login')
+  }
   return res
 }, err => {
   const res = err.response

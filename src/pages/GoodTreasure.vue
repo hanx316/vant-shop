@@ -11,7 +11,7 @@
         <div class="name">{{ name }}</div>
       </div>
       <p class="good-desc">{{ desc }}</p>
-      <van-progress v-if="this.startTime && this.endTime" :show-pivot="showProgressTxt" :percentage="progress" color="#f44" class="good-progress" />
+      <van-progress v-if="progress !== false" :show-pivot="showProgressTxt" :percentage="progress" color="#f44" class="good-progress" />
       <div class="treasure-info-panel">
         <div class="treasure-target treasure-info">
           <span>¥{{ target }}</span>
@@ -102,10 +102,8 @@ export default {
       betCount: 1,
       joiners: [],
       finish: 0,
-      startTime: '',
-      endTime: '',
-      outTime: 0,
-      progress: 0
+      progress: false,
+      targetNumber: 0
     }
   },
 
@@ -138,10 +136,8 @@ export default {
     this.support = data.join_number
     this.images = productData.pic
     this.unitPrice = data.join_price
+    this.targetNumber = data.total_number
     this.finish = data.finish
-    this.startTime = data.start_time
-    this.endTime = data.end_time
-    this.outTime = data.out_time_int
     this.progress = this.calProgress()
   },
 
@@ -163,11 +159,10 @@ export default {
     },
     calProgress() {
       if (this.finish === 1) return 100
-      let startTime = (new Date(this.startTime)).getTime()
-      let endTime = (new Date(this.endTime)).getTime()
-      let outTime = this.outTime
-      let totalTime = (endTime - startTime) / 1000
-      return ((totalTime - outTime) / totalTime).toFixed(2) * 100
+      let join = this.support
+      let total = this.targetNumber
+      let res = ((join / total) * 100).toFixed(1)
+      return res
     },
   }
 }

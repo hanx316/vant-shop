@@ -19,6 +19,11 @@ if (userInfoStorage) {
 }
 
 Vue.prototype.State = {
+  updateInfo(info) {
+    this.userInfo.member_name = info.member_name
+    this.userInfo.avatar = info.avatar
+    window.localStorage.setItem('X_USER_INFO', JSON.stringify(this.userInfo))
+  },
   isLogin: !!userInfo.access_token,
   token: userInfo.access_token || '',
   userInfo
