@@ -58,11 +58,11 @@ export default {
       this.$router.push(`/good-treasure/${id}`)
     },
     calProgress(item) {
-      if (item.finish === 1) return 100
       let join = item.join_number
       let total = item.total_number
+      if (item.finish === 1 || join === total) return 100
       let res = ((join / total) * 100).toFixed(1)
-      return res
+      return Number(res)
     },
     showProgressTxt(item) {
       return !Boolean(item.finish)

@@ -18,7 +18,7 @@
           <span>目标金额</span>
         </div>
         <div class="treasure-countdown treasure-info">
-          <span>{{ countdown }}</span>
+          <span>{{ countDownTxt }}</span>
           <span>剩余时间</span>
         </div>
         <div class="treasure-people treasure-info">
@@ -103,7 +103,8 @@ export default {
       joiners: [],
       finish: 0,
       progress: false,
-      targetNumber: 0
+      targetNumber: 0,
+      intervalId: 0
     }
   },
 
@@ -113,6 +114,17 @@ export default {
     },
     showProgressTxt() {
       return !Boolean(this.finish)
+    },
+    countDownTxt() {
+      // 计算分钟
+      let m = (this.countdown - this.countdown % 60) / 60
+      // 计算小时
+      let leftM = m % 60
+      let h = (m - leftM) / 60
+      // 计算天
+      let leftH = h % 24
+      let d = (h - leftH) / 24
+      return `${d}天${leftH}时${leftM}分`
     }
   },
 
@@ -132,18 +144,20 @@ export default {
     this.name = productData.product_name
     this.desc = productData.description
     this.target = data.total_price
-    this.countdown = data.out_time
+    this.countdown = data.out_time_int
     this.support = data.join_number
     this.images = productData.pic
     this.unitPrice = data.join_price
     this.targetNumber = data.total_number
     this.finish = data.finish
     this.progress = this.calProgress()
+    this.intervalId = this.countDown()
   },
 
   beforeRouteLeave(to, from, next) {
     const footerActiveIndex = 2
     this.$bus.$emit('show-footer', footerActiveIndex)
+    clearInterval(this.intervalId)
     next()
   },
   
@@ -158,12 +172,22 @@ export default {
       this.State.isLogin ? Toast.success('投注成功') : this.$router.push('/login')
     },
     calProgress() {
-      if (this.finish === 1) return 100
       let join = this.support
       let total = this.targetNumber
+      if (this.finish === 1 || join === total) return 100
       let res = ((join / total) * 100).toFixed(1)
-      return res
+      return Number(res)
     },
+    countDown() {
+      return setInterval(() => {
+        if (this.countdown < 60) {
+          clearInterval(this.intervalId)
+          this.countdown = 0
+        } else {
+          this.countdown -= 60
+        }
+      }, 60000)
+    }
   }
 }
 </script>
