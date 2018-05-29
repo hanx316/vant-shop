@@ -4,7 +4,7 @@
       <img :src="item.index_pic" class="good-pic">
       <div class="good-info">
         <span class="good-name">{{ item.product_name }}</span>
-        <!-- <span class="hot-point">热度：{{ item.hot }}</span> -->
+        <span class="hot-point">热度：{{ item.price }}</span>
       </div>
     </div>
   </van-list>
