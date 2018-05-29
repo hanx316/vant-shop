@@ -140,7 +140,7 @@ module.exports = {
         "upper_limit": 2,
         "finish": '@natural(0, 1)',
         "set_prize": 0,
-        "join_number": 120,
+        "join_number": 5,
         "prize_number": "100000118",
         "prize_time": "2018-04-22 13:49:36",
         "product": {
@@ -243,9 +243,9 @@ module.exports = {
   },
 
   getTreasureHistory(req, res) {
-    res.json({
-      "items": [{
-        "id": "3",
+    res.json(Mockjs.mock({
+      "items|10": [{
+        "id": "@natural(10000, 99999)",
         "prize_number": "100000118",
         "member_id": "1",
         "member_name": "王麻子",
@@ -256,14 +256,14 @@ module.exports = {
         "last_ip": "0"
       }],
       "_meta": {
-        "totalCount": 1,
+        "totalCount": 3,
         "pageCount": 1,
         "currentPage": 1,
-        "perPage": 15
+        "perPage": 10
       },
       "code": 0,
       "message": "success"
-    })
+    }))
   },
 
   orderHomeProduct(req, res) {
