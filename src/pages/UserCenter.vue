@@ -10,7 +10,7 @@
         <div class="user-detail user-id">用户ID: {{ userId }}</div>
       </div>
     </div>
-    <van-cell title="我的订单(暂不支持)" class="shadow" is-link @click="goOrderList" />
+    <van-cell title="我的订单" class="shadow" is-link @click="goOrderList" />
     <van-cell-group>
       <van-cell icon="edit" title="资料修改" is-link @click="goUserDetail" />
       <van-cell icon="pending-evaluate" title="消息通知(暂不支持)" class="shadow" is-link />
