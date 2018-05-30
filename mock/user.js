@@ -1,3 +1,5 @@
+const Mockjs = require('mockjs')
+
 module.exports = {
   signIn(req, res) {
     res.json({
@@ -23,9 +25,9 @@ module.exports = {
   },
 
   getOrderList(req, res) {
-    res.json({
-      "items": [{
-        "id": 1,
+    res.json(Mockjs.mock({
+      "items|10": [{
+        "id": '@natural(1, 1000)',
         "order_sn": "23947112321",
         "product_id": 1,
         "goods_number": 1,
@@ -39,7 +41,7 @@ module.exports = {
         "address": "",
         "mobile": "",
         "consignee": "",
-        "product_name": {
+        "product": {
           "id": 1,
           "product_name": "电话充值卡", 
           "pic": ["https://ss3.bdstatic.com/70cFv8Sh_Q1YnxGkpoWK1HF6hhy/it/u=1708265117,3619910444&fm=27&gp=0.jpg"],
@@ -59,14 +61,14 @@ module.exports = {
         }
       },
       "pager": {
-        "totalCount": 1,
+        "totalCount": 3,
         "pageCount": 1,
         "currentPage": 1,
-        "perPage": 15
+        "perPage": 10
       },
       "code": 0,
       "message": "success"
-    })
+    }))
   },
 
   updateUserInfo(req, res) {

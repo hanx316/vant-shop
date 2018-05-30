@@ -1,7 +1,7 @@
 <template>
   <div id="winner-history-page">
     <header-nav title="往期揭晓" />
-    <van-list v-model="loading" :finished="finished" @load="onLoad" class="goods-list">
+    <van-list v-model="loading" :finished="finished" @load="onLoad">
       <van-panel v-for="history in histories" :key="history.id" :title="`期号:${history.id} 揭晓时间：${history.prize_time}`" class="history-panel">
         <div class="history-info">
           <div class="winner-pic-box">
@@ -36,7 +36,7 @@ export default {
       histories: [],
       loading: false,
       finished: false,
-      currentPage: 1,
+      currentPage: 0,
       pageCount: 0
     }
   },
@@ -48,18 +48,11 @@ export default {
     })
   },
 
-  // created() {
-  //   product.getTreasureHistory({ id: this.$route.params.id }).then(res => {
-  //     if (res.code !== 0) return
-  //     this.histories = res.items
-  //   })
-  // },
-
   methods: {
     onLoad() {
       product.getTreasureHistory({
         id: this.$route.params.id,
-        page: this.currentPage,
+        page: this.currentPage + 1,
         pageSize: 10
       }).then(res => {
         if (res.code !== 0) return

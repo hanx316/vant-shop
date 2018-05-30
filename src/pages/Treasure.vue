@@ -33,7 +33,7 @@ export default {
       goods: [],
       loading: false,
       finished: false,
-      currentPage: 1,
+      currentPage: 0,
       pageCount: 0
     }
   },
@@ -41,7 +41,7 @@ export default {
   methods: {
     onLoad() {
       product.getTreasureList({
-        page: this.currentPage,
+        page: this.currentPage + 1,
         pageSize: 10
       }).then(res => {
         if (res.code !== 0) return
