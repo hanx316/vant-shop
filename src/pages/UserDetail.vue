@@ -4,7 +4,7 @@
     <van-cell-group>
       <van-field v-model="username" label="昵称" placeholder="请输入" />
       <van-cell>
-        <van-uploader class="uploader" :after-read="onRead" accept="image/*" multiple capture="camera">
+        <van-uploader class="uploader" :after-read="onRead" accept="image/*" :max-size="1024 * 300" @oversize="onOverSize">
           <van-icon name="photograph" />
           <span class="uploader-title">上传头像</span>
         </van-uploader>
@@ -61,6 +61,10 @@ export default {
     onRead(file) {
       console.log(file)
       this.file = file.file
+      Toast.success({
+        duration: 1500,
+        message: '选择成功\n提交上传'
+      })
     },
     resetData() {
       this.username = ''
@@ -99,7 +103,13 @@ export default {
           }
         })
       }
-    }
+    },
+    onOverSize() {
+      Toast.fail({
+        duration: 1500,
+        message: '头像大小不能超过300k'
+      })
+    },
   }
 }
 </script>
