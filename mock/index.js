@@ -59,4 +59,9 @@ module.exports = [
     method: 'post',
     handler: require('./user').updateUserInfo
   },
+  {
+    route: '/messages/index',
+    method: 'get',
+    handler: require('./user').getMessageList
+  },
 ]

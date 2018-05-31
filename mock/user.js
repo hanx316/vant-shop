@@ -27,7 +27,7 @@ module.exports = {
   getOrderList(req, res) {
     res.json(Mockjs.mock({
       "items|10": [{
-        "id": '@natural(1, 1000)',
+        "id": '@natural(1, 10000)',
         "order_sn": "23947112321",
         "product_id": 1,
         "goods_number": 1,
@@ -77,4 +77,28 @@ module.exports = {
       message: 'success'
     })
   },
+
+  getMessageList(req, res) {
+    res.json(Mockjs.mock({
+      'items|10': [{
+        id: '@natural(1, 10000)',
+        from_member_id: 0,
+        to_member_id: 4,
+        from: 4,
+        read: 0,
+        content: '您得预购订单已发货',
+        addtime: '2018-05-13 11:45',
+        data_id: 2,
+        read_time: 0
+      }],
+      pager: {
+        totalCount: 3,
+        pageCount: 1,
+        currentPage: 1,
+        perPage: 10
+      },
+      code: 0,
+      message: 'success'
+    }))
+  }
 }

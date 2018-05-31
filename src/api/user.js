@@ -13,7 +13,7 @@ export function signUp(data) {
 }
 
 export function getOrderList(data) {
-  return $ax.get('/order/shop-list', data).then(res => {
+  return $ax.get('/order/shop-list', { params: data }).then(res => {
     return res.data
   })
 }
@@ -27,6 +27,12 @@ export function updateUserInfo(data) {
     },
     data
   }).then(res => {
+    return res.data
+  })
+}
+
+export function getMessageList(data) {
+  return $ax.get('/messages/index', { params: data }).then(res => {
     return res.data
   })
 }

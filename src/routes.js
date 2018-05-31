@@ -12,6 +12,7 @@ import UserCenter from './pages/UserCenter'
 import Setting from './pages/Setting'
 import OrderList from './pages/OrderList'
 import UserDetail from './pages/UserDetail'
+import MessageList from './pages/MessageList'
 
 export default [
   {
@@ -62,7 +63,11 @@ export default [
       {
         path: '/user-detail',
         component: UserDetail
-      }
+      },
+      {
+        path: '/messages',
+        component: MessageList
+      },
     ]
   },
   {
