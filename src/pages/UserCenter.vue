@@ -13,7 +13,7 @@
     <van-cell title="我的订单" class="shadow" is-link @click="goOrderList" />
     <van-cell-group>
       <van-cell icon="edit" title="资料修改" is-link @click="goUserDetail" />
-      <van-cell icon="pending-evaluate" title="消息通知(暂不支持)" class="shadow" is-link />
+      <van-cell icon="pending-evaluate" title="消息通知" class="shadow" is-link @click="goMessageList" />
       <!-- <van-cell icon="like-o" title="分享" is-link /> -->
       <van-cell icon="setting" title="设置" class="shadow" is-link @click="goSetting" />
     </van-cell-group>
@@ -59,6 +59,9 @@ export default {
     },
     goUserDetail() {
       this.$router.push('/user-detail')
+    },
+    goMessageList() {
+      this.$router.push('/messages')
     }
   }
 }

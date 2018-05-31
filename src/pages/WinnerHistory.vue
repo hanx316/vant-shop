@@ -1,7 +1,7 @@
 <template>
   <div id="winner-history-page">
     <header-nav title="往期揭晓" />
-    <van-list v-model="loading" :finished="finished" @load="onLoad">
+    <van-list v-model="loading" :finished="finished" @load="onLoad" class="history-list">
       <van-panel v-for="history in histories" :key="history.id" :title="`期号:${history.id} 揭晓时间：${history.prize_time}`" class="history-panel">
         <div class="history-info">
           <div class="winner-pic-box">
@@ -72,6 +72,9 @@ export default {
 <style scoped>
 #winner-history-page {
   font-size: 16px;
+}
+.history-list {
+  margin-bottom: 50px;
 }
 .history-panel {
   box-shadow: 3px 3px 3px #ccc;

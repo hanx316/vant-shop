@@ -1,7 +1,7 @@
 <template>
   <div>
     <header-nav title="我的订单" />
-    <van-list v-model="loading" :finished="finished" @load="onLoad">
+    <van-list v-model="loading" :finished="finished" @load="onLoad" class="order-list">
       <van-panel class="order-panel" v-for="order in orders" :key="order.id" :title="`订单编号:${order.order_sn}`" :status="order.order_status_name">
         <div class="order-content">
           <div class="order-product">
@@ -64,6 +64,9 @@ export default {
 </script>
 
 <style>
+.order-list {
+  margin-bottom: 50px;
+}
 .order-panel {
   box-shadow: 3px 3px 3px #ccc;
   margin-bottom: 10px;
