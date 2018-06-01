@@ -35,6 +35,9 @@
           <van-stepper v-model="buyCount" />
         </van-cell>
         <van-cell title="订单金额：" :value="totalPrice" />
+        <van-cell title="联系人：">
+          <van-field v-model="username" placeholder="请输入联系人" />
+        </van-cell>
         <van-button size="large" type="danger" @click="submit" class="submit-btn">立即支付</van-button>
       </div>
     </van-actionsheet>
@@ -53,7 +56,8 @@ import {
   Card,
   Stepper,
   Button,
-  Toast
+  Toast,
+  Field
 } from 'vant'
 import HeaderNav from '@/components/HeaderNav'
 import api from '@/api'
@@ -72,7 +76,8 @@ export default {
     [Card.name]: Card,
     [Stepper.name]: Stepper,
     [Button.name]: Button,
-    [Toast.name]: Toast
+    [Toast.name]: Toast,
+    [Field.name]: Field
   },
 
   data() {
@@ -87,7 +92,8 @@ export default {
       images: [],
       details: '',
       showPanel: false,
-      buyCount: 1
+      buyCount: 1,
+      username: ''
     }
   },
 
@@ -131,7 +137,7 @@ export default {
     },
     submit() {
       // this.State.isLogin ? Toast.success('订购成功') : this.$router.push('/login')
-      location.href = 'alipayqr://platformapi/startapp?saId=10000007&qrcode=HTTPS://QR.ALIPAY.COM/FKX09109CPQQ9JI38FGH06'
+      // location.href = 'alipayqr://platformapi/startapp?saId=10000007&qrcode=HTTPS://QR.ALIPAY.COM/FKX09109CPQQ9JI38FGH06'
     }
   }
 }
