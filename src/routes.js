@@ -13,6 +13,7 @@ import Setting from './pages/Setting'
 import OrderList from './pages/OrderList'
 import UserDetail from './pages/UserDetail'
 import MessageList from './pages/MessageList'
+import Pay from './pages/Pay'
 
 export default [
   {
@@ -67,6 +68,17 @@ export default [
       {
         path: '/messages',
         component: MessageList
+      },
+      {
+        path: '/pay',
+        component: Pay,
+        props: route => {
+          return {
+            sn: route.query.sn,
+            price: route.query.price,
+            number: route.query.number
+          }
+        }
       },
     ]
   },

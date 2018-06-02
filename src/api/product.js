@@ -47,3 +47,9 @@ export function orderHomeProduct(data) {
     return res.data
   })
 }
+
+export function orderShopProduct(data) {
+  return $ax.post('/order/shop', data).then(res => {
+    return res.data
+  })
+}

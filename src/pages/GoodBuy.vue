@@ -35,9 +35,9 @@
           <van-stepper v-model="buyCount" />
         </van-cell>
         <van-cell title="订单金额：" :value="totalPrice" />
-        <van-cell title="联系人：">
-          <van-field v-model="username" placeholder="请输入联系人" />
-        </van-cell>
+        <van-field v-model="consignee" label="联系人：" placeholder="请输入联系人" />
+        <van-field v-model="mobile" label="手机：" placeholder="请输入联系电话" />
+        <van-field v-model="address" label="地址：" placeholder="请输入收货地址" />
         <van-button size="large" type="danger" @click="submit" class="submit-btn">立即支付</van-button>
       </div>
     </van-actionsheet>
@@ -93,7 +93,9 @@ export default {
       details: '',
       showPanel: false,
       buyCount: 1,
-      username: ''
+      consignee: '',
+      mobile: '',
+      address: ''
     }
   },
 
@@ -126,7 +128,7 @@ export default {
   },
 
   beforeRouteLeave(to, from, next) {
-    const footerActiveIndex = 1
+    const footerActiveIndex = to.path === '/home' ? 0 : 1
     this.$bus.$emit('show-footer', footerActiveIndex)
     next()
   },
@@ -136,8 +138,39 @@ export default {
       this.showPanel = true
     },
     submit() {
-      // this.State.isLogin ? Toast.success('订购成功') : this.$router.push('/login')
-      // location.href = 'alipayqr://platformapi/startapp?saId=10000007&qrcode=HTTPS://QR.ALIPAY.COM/FKX09109CPQQ9JI38FGH06'
+      if (!this.State.isLogin) {
+        this.$router.replace('/login')
+        return
+      }
+      if (!this.consignee || !this.mobile || !this.address) {
+        Toast.fail({
+          duration: 1500,
+          message: '请填写完整的收货信息'
+        })
+        return
+      } else if (!/^(13[0-9]|14[579]|15[0-3,5-9]|16[6]|17[0135678]|18[0-9]|19[89])\d{8}$/.test(this.mobile)) {
+        Toast.fail({
+          duration: 1500,
+          message: '手机号格式不正确'
+        })
+        return
+      }
+      product.orderShopProduct({
+        product_id: this.id,
+        goods_number: this.buyCount,
+        mobile: this.mobile,
+        consignee: this.consignee,
+        address: this.address
+      }).then(res => {
+        this.$router.push({
+          path: '/pay',
+          query: {
+            sn: res.order.order_sn,
+            price: res.order.order_price,
+            number: res.order.goods_number
+          }
+        })
+      })
     }
   }
 }

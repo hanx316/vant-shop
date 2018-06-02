@@ -64,4 +64,9 @@ module.exports = [
     method: 'get',
     handler: require('./user').getMessageList
   },
+  {
+    route: '/order/shop',
+    method: 'post',
+    handler: require('./product').orderShopProduct
+  }
 ]

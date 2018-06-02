@@ -272,4 +272,16 @@ module.exports = {
       message: '提交成功'
     })
   },
+
+  orderShopProduct(req, res) {
+    res.json({
+      code: 0,
+      message: '提交成功',
+      order: {
+        order_sn: 'xxx666',
+        order_price: '3000.5',
+        goods_number: 1
+      }
+    })
+  }
 }
