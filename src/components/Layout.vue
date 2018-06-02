@@ -26,6 +26,7 @@ export default {
       this.showFooter = true
       this.current = active
     })
+    this.$bus.$on('change-current', current => this.current = current)
   }
 }
 </script>

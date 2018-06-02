@@ -11,23 +11,39 @@
 import { Tabbar, TabbarItem } from 'vant'
 
 export default {
+  components: {
+    [Tabbar.name]: Tabbar,
+    [TabbarItem.name]: TabbarItem
+  },
+
   data() {
     return {
       active: 0
     }
   },
+
   props: ['current'],
-  components: {
-    [Tabbar.name]: Tabbar,
-    [TabbarItem.name]: TabbarItem
+
+  created() {
+    const pathMap = {
+      home: 0,
+      shop: 1,
+      treasure: 2,
+      'user-center': 3
+    }
+    let pathname = this.$route.path.slice(1)
+    this.active = pathMap[pathname] || 0
   },
+
   watch: {
     current(activeIndex) {
       activeIndex !== this.active && (this.active = activeIndex)
     }
   },
+
   methods: {
     onTabChange(i) {
+      this.$bus.$emit('change-current', i)
       switch(i) {
         case 0:
           this.$route.path !== '/home' && this.$router.push('/home')
@@ -43,16 +59,6 @@ export default {
           break
       }
     }
-  },
-  created() {
-    const pathMap = {
-      home: 0,
-      shop: 1,
-      treasure: 2,
-      'user-center': 3
-    }
-    let pathname = this.$route.path.slice(1)
-    this.active = pathMap[pathname] || 0
   }
 }
 </script>

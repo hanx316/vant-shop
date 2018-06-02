@@ -48,6 +48,14 @@ export default {
     })
   },
 
+  beforeRouteLeave(to, from, next) {
+    if (to.path === '/home') {
+      const footerActiveIndex = 0
+      this.$bus.$emit('show-footer', footerActiveIndex)
+    }
+    next()
+  },
+
   methods: {
     onLoad() {
       product.getTreasureHistory({
@@ -73,9 +81,9 @@ export default {
 #winner-history-page {
   font-size: 16px;
 }
-.history-list {
+/* .history-list {
   margin-bottom: 50px;
-}
+} */
 .history-panel {
   box-shadow: 3px 3px 3px #ccc;
   padding: 10px 15px;

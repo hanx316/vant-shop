@@ -32,6 +32,19 @@ export default {
     }
   },
 
+  beforeRouteEnter(to, from, next) {
+    next(vm => {
+      vm.$bus.$emit('hide-footer')
+      vm.id = vm.$route.params.id
+    })
+  },
+
+  beforeRouteLeave(to, from, next) {
+    const footerActiveIndex = to.path === '/home' ? 0 : 3
+    this.$bus.$emit('show-footer', footerActiveIndex)
+    next()
+  },
+
   methods: {
     onLoad() {
       user.getMessageList({
@@ -65,9 +78,9 @@ export default {
 </script>
 
 <style>
-.message-list {
+/* .message-list {
   margin-bottom: 50px;
-}
+} */
 .message-panel {
   box-shadow: 3px 3px 3px #ccc;
   margin-bottom: 10px;

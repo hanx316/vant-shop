@@ -155,7 +155,7 @@ export default {
   },
 
   beforeRouteLeave(to, from, next) {
-    const footerActiveIndex = 2
+    const footerActiveIndex = to.path === '/home' ? 0 : 2
     this.$bus.$emit('show-footer', footerActiveIndex)
     clearInterval(this.intervalId)
     next()
