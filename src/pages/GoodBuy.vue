@@ -162,6 +162,10 @@ export default {
         consignee: this.consignee,
         address: this.address
       }).then(res => {
+        if (res.code === -1) {
+          Toast.fail(res.message)
+          return
+        }
         this.$router.push({
           path: '/pay',
           query: {
@@ -171,7 +175,7 @@ export default {
           }
         })
       })
-    }
+    },
   }
 }
 </script>

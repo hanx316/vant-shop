@@ -68,5 +68,10 @@ module.exports = [
     route: '/order/shop',
     method: 'post',
     handler: require('./product').orderShopProduct
-  }
+  },
+  {
+    route: '/order/prize',
+    method: 'post',
+    handler: require('./product').orderTreasure
+  },
 ]

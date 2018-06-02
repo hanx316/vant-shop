@@ -14,6 +14,7 @@ import OrderList from './pages/OrderList'
 import UserDetail from './pages/UserDetail'
 import MessageList from './pages/MessageList'
 import Pay from './pages/Pay'
+import PayTreasure from './pages/PayTreasure'
 
 export default [
   {
@@ -72,6 +73,17 @@ export default [
       {
         path: '/pay',
         component: Pay,
+        props: route => {
+          return {
+            sn: route.query.sn,
+            price: route.query.price,
+            number: route.query.number
+          }
+        }
+      },
+      {
+        path: '/pay-treasure',
+        component: PayTreasure,
         props: route => {
           return {
             sn: route.query.sn,

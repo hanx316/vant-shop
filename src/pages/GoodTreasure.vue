@@ -34,7 +34,7 @@
         <p>{{ joiner.pay_time }}</p>
       </van-step>
     </van-steps>
-    <van-goods-action class="btn-bottom">
+    <van-goods-action class="btn-bottom" v-if="finish !== 1">
       <van-goods-action-big-btn @click="handleBetClick" text="立即下注" primary />
     </van-goods-action>
     <van-actionsheet v-model="showPanel" title="选择下注金额" class="bet-panel">
@@ -140,6 +140,7 @@ export default {
     if (res.code !== 0) return
     const data = res.data
     const productData = data.product
+    this.id = data.id
     this.joiners = res.join_list
     this.name = productData.product_name
     this.desc = productData.description
@@ -169,7 +170,27 @@ export default {
       this.showPanel = true
     },
     submit() {
-      this.State.isLogin ? Toast.success('投注成功') : this.$router.push('/login')
+      if (!this.State.isLogin) {
+        this.$router.replace('/login')
+        return
+      }
+      product.orderTreasure({
+        id: this.id,
+        join_number: this.betCount
+      }).then(res => {
+        if (res.code === -1) {
+          Toast.fail(res.message)
+          return
+        }
+        this.$router.push({
+          path: '/pay-treasure',
+          query: {
+            sn: res.order.order_sn,
+            price: res.order.join_price,
+            number: res.order.join_number
+          }
+        })
+      })
     },
     calProgress() {
       let join = this.support

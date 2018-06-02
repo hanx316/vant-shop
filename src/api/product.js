@@ -53,3 +53,9 @@ export function orderShopProduct(data) {
     return res.data
   })
 }
+
+export function orderTreasure(data) {
+  return $ax.post('/order/prize', data).then(res => {
+    return res.data
+  })
+}

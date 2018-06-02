@@ -176,8 +176,8 @@ module.exports = {
   },
 
   getTreasureDetail(req, res) {
-    res.json({
-      "code": 0, 
+    res.json(Mockjs.mock({
+      "code": 0,
       "data": {
         "id": 3,
         "product_id": 1,
@@ -188,7 +188,7 @@ module.exports = {
         "total_number": 120,
         "join_price": 2,
         "upper_limit": 2,
-        "finish": 0,
+        "finish": '@natural(0, 1)',
         "set_prize": 0,
         "join_number": 120,
         "prize_number": "100000118",
@@ -239,7 +239,7 @@ module.exports = {
           "telephone": "139****2922"
         }
       ]
-    })
+    }))
   },
 
   getTreasureHistory(req, res) {
@@ -281,6 +281,18 @@ module.exports = {
         order_sn: 'xxx666',
         order_price: '3000.5',
         goods_number: 1
+      }
+    })
+  },
+
+  orderTreasure(req, res) {
+    res.json({
+      code: 0,
+      message: '提交成功',
+      order: {
+        order_sn: 'xxx666',
+        join_price: '2.5',
+        join_number: 1
       }
     })
   }
