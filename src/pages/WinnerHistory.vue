@@ -64,7 +64,7 @@ export default {
         pageSize: 10
       }).then(res => {
         if (res.code !== 0) return
-        this.pageCount = res._meta.totalCount
+        this.pageCount = res._meta.pageCount
         this.histories.push(...res.items)
         if (this.currentPage >= this.pageCount) {
           this.finished = true

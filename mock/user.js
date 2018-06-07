@@ -62,7 +62,7 @@ module.exports = {
       },
       "pager": {
         "totalCount": 3,
-        "pageCount": 1,
+        "pageCount": 3,
         "currentPage": 1,
         "perPage": 10
       },
@@ -93,7 +93,7 @@ module.exports = {
       }],
       pager: {
         totalCount: 3,
-        pageCount: 1,
+        pageCount: 3,
         currentPage: 1,
         perPage: 10
       },
@@ -158,7 +158,7 @@ module.exports = {
       },
       "pager": {
         "totalCount": 3,
-        "pageCount": 1,
+        "pageCount": 3,
         "currentPage": 1,
         "perPage": 10
       },

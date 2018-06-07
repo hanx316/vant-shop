@@ -52,7 +52,7 @@ export default {
         pageSize: 10
       }).then(res => {
         if (res.code !== 0) return
-        this.pageCount = res.pager.totalCount
+        this.pageCount = res.pager.pageCount
         this.messages.push(...res.items)
         if (this.currentPage >= this.pageCount) {
           this.finished = true
