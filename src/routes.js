@@ -11,6 +11,7 @@ import WinnerHistory from './pages/WinnerHistory'
 import UserCenter from './pages/UserCenter'
 import Setting from './pages/Setting'
 import OrderList from './pages/OrderList'
+import PrizeList from './pages/PrizeList'
 import UserDetail from './pages/UserDetail'
 import MessageList from './pages/MessageList'
 import Pay from './pages/Pay'
@@ -61,6 +62,10 @@ export default [
       {
         path: '/order-list',
         component: OrderList
+      },
+      {
+        path: '/prizes',
+        component: PrizeList
       },
       {
         path: '/user-detail',
