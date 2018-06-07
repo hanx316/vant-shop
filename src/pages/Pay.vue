@@ -49,7 +49,7 @@ export default {
 
   methods: {
     goPay() {
-      location.href = `alipayqr://platformapi/startapp?saId=10000007&qrcode=HTTPS://QR.ALIPAY.COM/FKX09109CPQQ9JI38FGH06&title=${this.sn}`
+      
     }
   }
 }
