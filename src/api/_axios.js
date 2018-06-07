@@ -7,6 +7,9 @@ $ax.interceptors.request.use(config => {
   if (token) {
     config.headers['Authorization'] = `Bearer ${token}`
   }
+  // if (process.env.NODE_ENV === 'development') {
+  //   config.baseURL = // proxy url
+  // }
   return config
 }, err => {
   console.log(err)

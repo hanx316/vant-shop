@@ -49,7 +49,7 @@ export default {
 
   methods: {
     goPay() {
-      
+      // to pay
     }
   }
 }
