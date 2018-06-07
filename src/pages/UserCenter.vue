@@ -12,7 +12,7 @@
     </div>
     <van-cell-group>
       <van-cell icon="shopping-cart" title="我的订单" is-link @click="goOrderList" />
-      <van-cell icon="receive-gift" title="夺宝记录" class="shadow" is-link @click="goOrderList" />
+      <van-cell icon="receive-gift" title="夺宝记录" class="shadow" is-link @click="goPrizeList" />
     </van-cell-group>
     <van-cell-group>
       <van-cell icon="edit" title="资料修改" is-link @click="goUserDetail" />
@@ -65,6 +65,9 @@ export default {
     },
     goMessageList() {
       this.$router.push('/messages')
+    },
+    goPrizeList() {
+      this.$router.push('/prizes')
     }
   }
 }
