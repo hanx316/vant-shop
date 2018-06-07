@@ -2,14 +2,18 @@
   <div>
     <header-nav title="夺宝记录" />
     <van-list v-model="loading" :finished="finished" @load="onLoad" class="order-list">
-      <van-panel class="order-panel" v-for="order in orders" :key="order.id" :title="`订单编号:${order.order_sn}`" :status="order.prized_name">
+      <van-panel class="order-panel" v-for="order in orders" :key="order.id" :title="`订单编号:${order.order_sn}`" :status="order.order_status_name">
         <div class="order-content">
           <div class="order-product">
             <span>{{ order.productPrize.product.product_name }}</span>
             <span>数量: {{ order.join_number }}</span>
           </div>
           <div class="order-user">投注时间: {{ order.add_time }}</div>
+          <div class="order-user">开奖状态: {{ order.prized_name }}</div>
           <div class="order-price">订单价格: {{ order.join_price }}</div>
+        </div>
+        <div class="pay-btn-box" v-if="order.order_status === 1 && order.productPrize.finish !== 1" slot="footer">
+          <van-button size="small" type="danger" @click="goPay(order)">支付</van-button>
         </div>
       </van-panel>
     </van-list>
@@ -17,7 +21,7 @@
 </template>
 
 <script>
-import { Panel, List } from 'vant'
+import { Panel, List, Button } from 'vant'
 import HeaderNav from '@/components/HeaderNav'
 import api from '@/api'
 const { user } = api
@@ -26,7 +30,8 @@ export default {
   components: {
     HeaderNav,
     [Panel.name]: Panel,
-    [List.name]: List
+    [List.name]: List,
+    [Button.name]: Button
   },
 
   data() {
@@ -66,6 +71,16 @@ export default {
         }
         this.loading = false
       })
+    },
+    goPay(order) {
+      this.$router.push({
+        path: '/pay-treasure',
+        query: {
+          sn: order.order_sn,
+          price: order.join_price,
+          number: order.join_number
+        }
+      })
     }
   }
 }
@@ -91,5 +106,9 @@ export default {
 }
 .order-price {
   text-align: right;
+}
+.pay-btn-box {
+  text-align: right;
+  font-size: 16px;
 }
 </style>

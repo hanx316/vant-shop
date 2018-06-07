@@ -118,6 +118,8 @@ module.exports = {
         "consignee": "",
         "prized": "",
         "prized_name": "已中奖",
+        "order_status": 1,
+        "order_status_name": "待支付",
         "productPrize": {
           "id": 3,
           "product_id": 1,
@@ -128,7 +130,7 @@ module.exports = {
           "total_number": 120,
           "join_price": 2,
           "upper_limit": 2,
-          "finish": 1,
+          "finish": 0,
           "set_prize": 1,
           "join_number": 120,
           "prize_number": "100000118",
