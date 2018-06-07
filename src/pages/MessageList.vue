@@ -54,11 +54,10 @@ export default {
         if (res.code !== 0) return
         this.pageCount = res.pager.pageCount
         this.messages.push(...res.items)
-        if (this.currentPage >= this.pageCount) {
+        if (++this.currentPage >= this.pageCount) {
           this.finished = true
         }
         this.loading = false
-        this.currentPage += 1
       })
     },
     getMessageType(from) {

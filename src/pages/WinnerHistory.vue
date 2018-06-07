@@ -66,11 +66,10 @@ export default {
         if (res.code !== 0) return
         this.pageCount = res._meta.pageCount
         this.histories.push(...res.items)
-        if (this.currentPage >= this.pageCount) {
+        if (++this.currentPage >= this.pageCount) {
           this.finished = true
         }
         this.loading = false
-        this.currentPage += 1
       })
     },
   }
