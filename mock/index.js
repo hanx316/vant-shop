@@ -74,4 +74,9 @@ module.exports = [
     method: 'post',
     handler: require('./product').orderTreasure
   },
+  {
+    route: '/order/prize-list',
+    method: 'get',
+    handler: require('./user').getPrizeList
+  },
 ]
