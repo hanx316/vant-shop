@@ -36,3 +36,9 @@ export function getMessageList(data) {
     return res.data
   })
 }
+
+export function getPrizeList(data) {
+  return $ax.get('/order/prize-list', { params: data }).then(res => {
+    return res.data
+  })
+}
